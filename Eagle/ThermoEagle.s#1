@@ -22102,9 +22102,17 @@ D = Direct mounting &lt;p&gt;
 <wire x1="-111.76" y1="76.2" x2="-119.38" y2="76.2" width="0.1524" layer="91"/>
 <junction x="-111.76" y="91.44"/>
 <wire x1="-111.76" y1="91.44" x2="-111.76" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="-157.48" y1="106.68" x2="-129.54" y2="106.68" width="0.1524" layer="91"/>
+<pinref part="R13" gate="G$1" pin="2"/>
+<wire x1="-157.48" y1="106.68" x2="-157.48" y2="111.76" width="0.1524" layer="91"/>
+<pinref part="U1" gate="A" pin="INPUT1-"/>
+<wire x1="-154.94" y1="73.66" x2="-157.48" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="-157.48" y1="73.66" x2="-157.48" y2="106.68" width="0.1524" layer="91"/>
+<junction x="-157.48" y="106.68"/>
 <pinref part="J2" gate="G$1" pin="2"/>
-<wire x1="-129.54" y1="109.22" x2="-129.54" y2="106.68" width="0.1524" layer="91"/>
-<wire x1="-129.54" y1="106.68" x2="-111.76" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="-129.54" y1="106.68" x2="-129.54" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="-111.76" y1="106.68" x2="-129.54" y2="106.68" width="0.1524" layer="91"/>
+<junction x="-129.54" y="106.68"/>
 </segment>
 </net>
 <net name="N$52" class="0">
@@ -22375,19 +22383,6 @@ D = Direct mounting &lt;p&gt;
 <pinref part="R3" gate="G$1" pin="2"/>
 <pinref part="T2" gate="G$1" pin="C"/>
 <wire x1="134.62" y1="43.18" x2="129.54" y2="43.18" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$31" class="0">
-<segment>
-<pinref part="R13" gate="G$1" pin="2"/>
-<pinref part="U1" gate="A" pin="INPUT1-"/>
-<wire x1="-154.94" y1="73.66" x2="-157.48" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="-157.48" y1="73.66" x2="-157.48" y2="106.68" width="0.1524" layer="91"/>
-<pinref part="J2" gate="G$1" pin="1"/>
-<wire x1="-157.48" y1="106.68" x2="-157.48" y2="111.76" width="0.1524" layer="91"/>
-<wire x1="-132.08" y1="109.22" x2="-132.08" y2="106.68" width="0.1524" layer="91"/>
-<wire x1="-132.08" y1="106.68" x2="-157.48" y2="106.68" width="0.1524" layer="91"/>
-<junction x="-157.48" y="106.68"/>
 </segment>
 </net>
 </nets>
