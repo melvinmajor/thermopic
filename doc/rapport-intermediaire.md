@@ -109,18 +109,18 @@ Hubert à trouvé l’API [jSerialComm](https://github.com/Fazecast/jSerialComm)
 
 #### Schéma technique sur Proteus et Eagle (Maxime de Cock & Guillaume Vanden Herrewegen)
 
-_**Echéance le 8 février à 19h**_ - _**Finalisé le 17 février**_
+_**Echéance le 8 février à 19h**_ - _**Finalisé le 21 février**_
 
 Le délai ne fut pas respecté, entre autres car nous ne savions pas encore clairement quels composants utiliser plus précisément dans notre circuit, mais également par la difficulté de trouver une version propre de Proteus sans virus et disposant des librairies de base.
 Le schéma technique sur _Eagle_ fut achevé le 16 février en courant de journée par Maxime.
 Pour ce qui concerne le schéma sur _Proteus_, nous attendions la fin du schéma sur Eagle pour pouvoir l’achever.
-Quelques dernières retouches ont été réalisées le 17 février sur Eagle tout comme la finalisation de Proteus, par Maxime.
+Quelques dernières retouches ont été réalisées le 21 février sur Eagle tout comme la finalisation de Proteus, par Maxime.
 
 #### Sélection des composants nécessaires au projet (groupe entier)
 
 _**Finalisé le 17 février**_
 
-Bien qu’un point très important, nous avions fini de choisir les composants nécessaires au projet lorsque nous avions terminé le schéma technique sur Eagle.
+Bien qu’un point très important, nous avions fini de choisir les composants nécessaires au projet lorsque nous avions terminé la partie principale du schéma technique sur Eagle.
 Lors des cours, nous avons pu remarquer l’intérêt de certains composants et reprendre ces derniers dans notre schéma afin de finaliser correctement la partie technique de l’électronique du projet.
 
 #### Rapport intermédiaire (groupe entier)
