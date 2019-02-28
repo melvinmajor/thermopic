@@ -7,6 +7,16 @@
 *.iml
 .workspace
 
+# Fix Maxime not understanding what lowerCase directory names does mean
+Eagle/*
+Proteus/*
+
+# Temporary files from Eagle
+eagle/*.b#*
+eagle/*.s#*
+eagle/*.job
+eagle/*.pro
+
 # Other files
 .classpath
 .metadata/
