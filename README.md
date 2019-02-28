@@ -1,6 +1,6 @@
-># ThermoPIC
->
->1st project of the academic year for the lesson of digital electronics 2nd Bachelor at EPHEC Louvain-la-Neuve
+# ThermoPIC
+
+1st project of the academic year for the lesson of digital electronics 2nd Bachelor at EPHEC Louvain-la-Neuve
 
 ## Our Team
 
