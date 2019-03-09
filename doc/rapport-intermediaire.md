@@ -56,8 +56,10 @@ Etat d’avancement
 
 ### Général
 
-Ce projet étant non seulement intéressant, mais aussi amusant, nous voulions nous y mettre le plus vite possible pour ne pas être déborder par les autres projets en parallèles. 
-La prise en main des programmes requis n’a pas été facile malgré l’intuitivité assez avancée de ces programmes. Nous avons, par soucis de disponibilité des programmes, commencé par le schéma du circuit sur Eagle. Bien évidemment, nous avons par la suite fait la simulation sur Proteus lorsque nous avions accès à ce programme.
+Ce projet étant non seulement intéressant, mais aussi amusant, nous voulions nous y mettre le plus vite possible pour ne pas être débordé par les autres projets en parallèle.
+La prise en main des programmes requis n’a pas été facile malgré l’intuitivité assez avancée de ces programmes.
+Nous avons, par soucis de disponibilité des programmes, commencé par le schéma du circuit sur Eagle.
+Bien évidemment, nous avons par la suite fait la simulation sur Proteus lorsque nous avions accès à ce programme.
 
 //à compléter!
 
@@ -65,12 +67,25 @@ La prise en main des programmes requis n’a pas été facile malgré l’intuit
 
 ### Programmation
 
-Pour la partie programmation, nous avons décider de partir sur un circuit vide. Nous avons ajouté les différentes parties du circuit au fur et à mesure que le code avançait.
-La première partie était l’affichage de la température sur les afficheurs 7 segments. Une fois cette partie fonctionnelle, nous avons travaillé sur l’entrer analogique de la sonde de température. 
-Nous avons eu quelques difficultés concernant cette partie du code car nous n’arrivions pas à visualiser quel type de valeur le convertisseur analogique numérique sortait.  Une fois cette valeur « métrisée » nous l’avons convertie pour qu’elle puisse représenter la température relevée. Nous avons ensuite pu afficher aisément la température sur les afficheurs 7 segments.
+Pour la partie programmation, nous avons décidé de partir d'un circuit vide.
+Nous avons ajouté les différentes parties du circuit au fur et à mesure que le code avançait.
+La première partie était l’affichage de la température sur les afficheurs 7 segments.
+Une fois cette partie fonctionnelle, nous avons travaillé sur l’entrer analogique de la sonde de température.
+
+Nous avons eu quelques difficultés concernant cette partie du code car nous n’arrivions pas à visualiser quelle type de valeur le convertisseur analogique numérique sortait.
+Une fois cette valeur « maitrisée », nous l’avons convertie pour qu’elle puisse représenter la température relevée.
+Nous avons ensuite pu afficher aisément la température sur les afficheurs 7 segments.
 
 Schéma
 ------
+
+### Schéma du circuit
+
+![Schéma du circuit réalisé sur Eagle](schema.png)
+
+### Plaque de tirage PCB
+
+![Plaque de tirage PCB réalisé sur Eagle](pcb.png)
 
 Répartition du travail
 ----------------------
@@ -132,6 +147,24 @@ _**Finalisé le 17 février**_
 Bien qu’un point très important, nous avions fini de choisir les composants nécessaires au projet lorsque nous avions terminé la partie principale du schéma technique sur Eagle.
 Lors des cours, nous avons pu remarquer l’intérêt de certains composants et reprendre ces derniers dans notre schéma afin de finaliser correctement la partie technique de l’électronique du projet.
 
+#### Fichier EAGLE (*.brd) pour tirage PCB (Melvin Campos Casares)
+
+_**Echéance le 11 mars à 17h**_ - _**Finalisé le 28 février**_
+
+Avec le schéma achevé le 16 février, il n’y avait plus qu’à réaliser le fichier de carte de circuit imprimé (_**.brd**_).
+Pour ce faire, nous sommes parti du schéma Eagle et nous nous sommes rendu compte de certaines modifications à apporter au niveau du schéma afin que notre plaque d'impressions soit correcte.
+De plus, lors du commencement de la programmation du code C, nous avons pu remarquer également certaines modifications à apporter au niveau des résistances choisies, n'entrainant heureusement pas de nouveaux changements au niveau du fichier servant au tirage PCB.
+
+#### Programmation du code C (groupe entier)
+
+_**Commencé le 6 mars**_
+
+La programmation du code C de ce projet est principalement géré par Guillaume Vanden Herrewegen.
+Cela n'empêche que nous nous échevons des informations au fur et à mesure de l'évolution afin de pouvoir avancer lorsque nous rencontrons un problème.
+
+Maxime De Cock à soulevé des points pertinents concernant la partie électronique à devoir tenir compte pour la programmation en C alors que Hubert Van De Walle et Melvin Campos Casares ont plus aidé concernant les choix et directives à prendre afin de contrecarrer certains problèmes rencontré.
+A l'heure actuelle, Guillaume Vanden Herrewegen est la personne principale ayant écrit le code C et ayant réalisé les tests préalables permettant de s'assurer du bon fonctionnement.
+
 #### Rapport intermédiaire (groupe entier)
 
 _**Echéance le 11 mars à 17h**_
@@ -139,18 +172,19 @@ _**Echéance le 11 mars à 17h**_
 Le rapport intermédiaire fut commencé le 8 février et complété au fur et à mesure de l’avancement du projet.
 Il a été tenu à jour par tout le groupe et principalement écrit par Melvin sur base des retours des autres membres du groupe.
 
-#### Fichier EAGLE (*.brd) pour tirage PCB (Melvin Campos Casares)
-
-_**Echéance le 11 mars à 17h**_
-
-Avec le schéma achevé le 16 février, il n’y a plus qu’à réaliser le fichier de carte de circuit imprimé (_**.brd**_).
-
 ### Estimation du travail à faire
 
 Objectifs personnels et attente
 -------------------------------
 
 ### Melvin Campos Casares
+
+Pour ce projet, j'espérais grandement pouvoir enfin comprendre l'utilisation de certains logiciels d'électronique permettant la création d'un schéma ainsi que sa manipulation via simulation.
+De plus, avoir un bon travail d'équipe et s'assurer de tout terminer à temps et à heure pour l'échéance finale est l'un de mes objectifs prioritaire.
+
+N'ayant pas de facilité à la programmation en C, pouvoir discuter de certains points me paraissant plus obscures avec les autres membres du groupe afin de mieux comprendre et mieux visualiser ce langage est un de mes objectifs _bonus_.
+
+Mêler de la programmation avec de l'électronique et obtenir quelque chose de concret et fonctionnel au quotidien est mon attente principale pour ce projet.
 
 ### Maxime De Cock
 
