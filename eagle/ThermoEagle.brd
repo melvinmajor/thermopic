@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.0">
+<eagle version="9.3.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -148,12 +148,12 @@
 <wire x1="100" y1="0" x2="100" y2="80" width="0" layer="20"/>
 <wire x1="100" y1="80" x2="0" y2="80" width="0" layer="20"/>
 <wire x1="0" y1="80" x2="0" y2="0" width="0" layer="20"/>
-<text x="36.83" y="1.27" size="1.778" layer="16" rot="MR0">Melvin Campos Casares
+<text x="39.37" y="3.81" size="1.778" layer="16" rot="MR0">Melvin Campos Casares
 Maxime De Cock
 Hubert Van De Walle
 Guillaume Vanden Herrewegen</text>
-<text x="29.21" y="12.7" size="1.778" layer="16" rot="MR0">EPHEC 1819 - Groupe 1</text>
-<text x="21.59" y="17.78" size="1.778" layer="16" rot="MR0">ThermoPIC</text>
+<text x="31.75" y="15.24" size="1.778" layer="16" rot="MR0">EPHEC 1819 - Groupe 1</text>
+<text x="16.51" y="20.32" size="1.778" layer="16" rot="MR0">ThermoPIC</text>
 </plain>
 <libraries>
 <library name="rcl" urn="urn:adsk.eagle:library:334">
@@ -4233,6 +4233,12 @@ design rules under a new name.</description>
 <wire x1="56.8452" y1="58.5216" x2="76.2" y2="58.5216" width="0.1524" layer="16"/>
 <wire x1="56.0832" y1="59.2836" x2="56.8452" y2="58.5216" width="0.1524" layer="16"/>
 <wire x1="56.0832" y1="68.4276" x2="56.0832" y2="59.2836" width="0.1524" layer="16"/>
+<polygon width="0.1524" layer="16" isolate="0.02031875">
+<vertex x="0" y="80.01"/>
+<vertex x="100.33" y="80.01"/>
+<vertex x="100.33" y="0"/>
+<vertex x="0" y="0"/>
+</polygon>
 </signal>
 <signal name="N$55">
 <contactref element="U$1" pad="1"/>
