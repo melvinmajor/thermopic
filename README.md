@@ -4,6 +4,8 @@
 
 ## Our Team
 
+Our group number is: **1**
+
 Our team is composed of 4 people :
 
 - Melvin Campos Casares (_**@melvinmajor**_)
