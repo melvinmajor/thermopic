@@ -17,10 +17,10 @@ Objectifs du projet
 
 ### Introduction
 
-ThermoPIC est un projet consistant en l’application d’une sonde température envoyant au PIC une mesure analogique de la température ambiante d’une pièce.
+ThermoPIC est un projet consistant en l’application d’une sonde de température envoyant au PIC une mesure analogique de la température ambiante d’une pièce.
 
 Une intégration digitale et un signal d’alerte sont tous deux requis afin de prévenir l’utilisateur de l’éventuel dépassement d’un seuil critique défini par l’utilisateur.
-L’intégration digitale est l’affichage de la température sur un afficheur intégré au circuit, tout comme d’un indicateur sur le programme lancé sur l’ordinateur relié au PIC. Le signal d’alerte n’est d’autres que l’enclenchement d’une LED de couleur rouge et un message d’alerte sur l’ordinateur relié.
+L’intégration digitale est l’affichage de la température sur un afficheur intégré au circuit, tout comme d’un indicateur sur le programme lancé sur l’ordinateur relié au PIC. Le signal d’alerte n’est autres que l’enclenchement d’une LED de couleur rouge et un message d’alerte sur l’ordinateur relié.
 
 Ce projet est à construire de A à Z, dans le sens où il nous faut schématiser, simuler, mais également programmer l’intégralité du circuit électronique choisi.
 
@@ -28,7 +28,7 @@ Ce projet est à construire de A à Z, dans le sens où il nous faut schématise
 
 _Certaines contraintes nous ont été imposée._
 Tout d’abord, la communication entre le circuit et l’ordinateur doit se faire par le biais d’une application écrite en Java.
-De plus, certains composants du circuit sont prédéfinis comme le PIC, la sonde température, les afficheurs 7 segments et des LED (une rouge et une verte). La sonde température doit fonctionner dans la gamme de 0°C à 100°C **minimum**, les afficheurs 7 segments doivent servir à l’affichage de la température et les LED aux alertes (LED rouge clignotante si alerte, LED verte continue si aucune alerte en cours).
+De plus, certains composants du circuit sont prédéfinis comme le PIC, la sonde de température, les afficheurs 7 segments et des LED (une rouge et une verte). La sonde température doit fonctionner dans la gamme de 0°C à 100°C **minimum**, les afficheurs 7 segments doivent servir à l’affichage de la température et les LED aux alertes (LED rouge clignotante si alerte, LED verte continue si aucune alerte en cours).
 
 La programmation du PIC est possible via l’interface RS232 ou via l’utilisation d’un module FTDI permettant la conversion du port série en port mini-USB.
 
@@ -56,9 +56,18 @@ Etat d’avancement
 
 ### Général
 
+Ce projet étant non seulement intéressant, mais aussi amusant, nous voulions nous y mettre le plus vite possible pour ne pas être déborder par les autres projets en parallèles. 
+La prise en main des programmes requis n’a pas été facile malgré l’intuitivité assez avancée de ces programmes. Nous avons, par soucis de disponibilité des programmes, commencé par le schéma du circuit sur Eagle. Bien évidemment, nous avons par la suite fait la simulation sur Proteus lorsque nous avions accès à ce programme.
+
+//à compléter!
+
 ### Simulation
 
 ### Programmation
+
+Pour la partie programmation, nous avons décider de partir sur un circuit vide. Nous avons ajouté les différentes parties du circuit au fur et à mesure que le code avançait.
+La première partie était l’affichage de la température sur les afficheurs 7 segments. Une fois cette partie fonctionnelle, nous avons travaillé sur l’entrer analogique de la sonde de température. 
+Nous avons eu quelques difficultés concernant cette partie du code car nous n’arrivions pas à visualiser quel type de valeur le convertisseur analogique numérique sortait.  Une fois cette valeur « métrisée » nous l’avons convertie pour qu’elle puisse représenter la température relevée. Nous avons ensuite pu afficher aisément la température sur les afficheurs 7 segments.
 
 Schéma
 ------
@@ -69,7 +78,7 @@ Répartition du travail
 Nous nous sommes réparti le travail par le biais de la plateforme Trello.
 Il s’agit d’un outil collaboratif de gestion de projets qui nous a été conseillé lors de la prise de connaissance du cahier des charges de ce projet.
 
-Certains membres du groupe en ont déjà précédemment entendu parlé par d’étudiants de la section comptabilité de l’EPHEC.
+Nous avons déjà eu l'occasion d'utiliser cet outil lors de précédents projets.
 
 ### Planning et échéances
 
