@@ -9,8 +9,8 @@ date: 11 mars 2019
 titlepage: true
 ---
 
-Rapport intermédiaire - ThermoPIC
-=================================
+Rapport intermédiaire - ThermoPIC (Groupe 1)
+============================================
 
 Objectifs du projet
 -------------------
