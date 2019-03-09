@@ -85,6 +85,8 @@ Schéma
 
 ### Plaque de tirage PCB
 
+Schéma de la plaque de tirage PCB réalisé sur Eagle sans l'isolation par soucis de clarté dans le rapport :
+
 ![Plaque de tirage PCB réalisé sur Eagle](pcb.png)
 
 Répartition du travail
