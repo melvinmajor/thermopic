@@ -59,7 +59,7 @@ Lors du fonctionnenemt du circuit, si la température est inférieur à la valeu
 
 Nous avons pensé en groupe qu'il serait intéressant de réduire la consommation électrique et le besoin en composants de notre prototype afin que celui-ci respecte au mieux les désires de chacun. Pour respecter cet engagement, nous avons utilisé un affichage simultané sur deux afficheurs 7 segments et en n'utilisant qu'un seul décodeur à 7 segments. Grâce à deux transistors, nous parvenons choisir sur quel afficheur, afficher un chiffre. Si on transit rapidement entre les deux afficheurs, l'impact visuel sera inexistant. Cet manipulation à permis de réduire de 50% la consommation électrique de l'affichage et l'utilisation d'un seul décodeur 7 segments.
 
-
+Une autre solution possible, mais plus difficile à mettre en place, serait d'allumer les segments de l'afficheurs un par un. Seulement, cette option n'utiliserait pas un décodeur et donc nous devrions utiliser 7 sorties du pic. Cette option n'était donc pas envisageable.
 
 Etat d’avancement
 -----------------
