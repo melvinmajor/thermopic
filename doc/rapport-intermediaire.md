@@ -51,6 +51,16 @@ La programmation du PIC est possible via l’interface RS232 ou via l’utilisat
 
 ### Fonctionnement
 
+Le fonctionneement de ce circuit repose sur un programme tournant en boucle, qui va à chaque instant donné, récupérer la valeur de la sonde de température et comparer cette valeur à la température maximale entrée par l'utilisateur via une application Java. Ce programme va aussi vérifier si une donnée est reçue via son RX envoyée depuis l'application Java vers l'entrée Serial du pic.
+
+Lors du fonctionnenemt du circuit, si la température est inférieur à la valeur maximale désirée, une led verte sera allumée pour signaler que tout va bien. Si cette température dépasse la valeur maximale, une led rouge clignotera pour signaler l'utilisateur que la température maximale a été dépassée. L'interface de l'application Java signalera aussi cette alerte.
+
+### Performance
+
+Nous avons pensé en groupe qu'il serait intéressant de réduire la consommation électrique et le besoin en composants de notre prototype afin que celui-ci respecte au mieux les désires de chacun. Pour respecter cet engagement, nous avons utilisé un affichage simultané sur deux afficheurs 7 segments et en n'utilisant qu'un seul décodeur à 7 segments. Grâce à deux transistors, nous parvenons choisir sur quel afficheur, afficher un chiffre. Si on transit rapidement entre les deux afficheurs, l'impact visuel sera inexistant. Cet manipulation à permis de réduire de 50% la consommation électrique de l'affichage et l'utilisation d'un seul décodeur 7 segments.
+
+
+
 Etat d’avancement
 -----------------
 
@@ -191,6 +201,10 @@ Mêler de la programmation avec de l'électronique et obtenir quelque chose de c
 ### Maxime De Cock
 
 ### Guillaume Vanden Herrewegen
+
+Ayant déjà réalisé des projets en électronique de type Arduino, j'étais vraiment intéressé par ce projet. De plus, nous allions apprendre à manipuler des programmes qui permettent de simuler un circuit électronique.
+
+Grâce à ce projet, j'espère pouvoir m'améliorer dans la gestion de groupe, mais aussi dans l'amélioration de mes compétences en électronique ainsi que pouvoir, suite à l'analyse d'une demande, concevoir et assembler un prototype d'un projet en électronique.
 
 ### Hubert Van De Walle
 
