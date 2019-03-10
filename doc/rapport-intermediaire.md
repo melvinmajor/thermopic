@@ -208,5 +208,10 @@ Grâce à ce projet, j'espère pouvoir m'améliorer dans la gestion de groupe, m
 
 ### Hubert Van De Walle
 
+L’existence d’un projet tel que celui-ci en deuxième année des études TI me semble indispensable. 
+En effet, il m'a permis d'avoir une meilleure idée de l'interaction entre l'électronique et la programmation. 
+J'ai également découvert les différentes étapes rentrant dans la réalisation d'un circuit imprimé. 
+De plus, ne pas se limiter à la théorie et réaliser un projet concret m’a permis, personnellement, de renforcer mon intérêt envers l'électronique
+
 Conclusion
 ----------
