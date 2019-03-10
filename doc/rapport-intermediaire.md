@@ -200,6 +200,9 @@ Mêler de la programmation avec de l'électronique et obtenir quelque chose de c
 
 ### Maxime De Cock
 
+Dès l'annonce du projet, j'ai été très enthousiaste à l'idée de faire ce montage, j'ai donc demandé à mes coéquipiers de me laisser la partie schéma electronique. 
+J'aime vraiment ça, c'est pourquoi j'attends beaucoup de ce projet, entre l'apprentissage des différents langages/programmes et la conpréhension des datasheet, ce sont mes premiers vrais objectifs.
+
 ### Guillaume Vanden Herrewegen
 
 Ayant déjà réalisé des projets en électronique de type Arduino, j'étais vraiment intéressé par ce projet. De plus, nous allions apprendre à manipuler des programmes qui permettent de simuler un circuit électronique.
