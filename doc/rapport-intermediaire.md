@@ -47,14 +47,13 @@ La programmation du PIC est possible via l’interface RS232 ou via l’utilisat
 2. Sonde température LM35
 3. Amplificateur LM324
 4. Crystal XTALS
-5. Port série
-6. Convertisseur série MAX232
-7. Deux afficheurs 7 segments à cathodes communes HD-1103
-8. Alimentation 5V
-9. Pin Header PINHD-1X3
-10. Résistances
-11. LED rouge et verte LED3MM et/ou LED5MM
-12. Bouton poussoir 10-XX
+5. Port série et convertisseur série MAX232
+6. Deux afficheurs 7 segments à cathodes communes HD-1103
+7. Alimentation 5V
+8. Pin Header PINHD-1X3
+9. Résistances
+10. LED rouge et verte LED3MM et/ou LED5MM
+11. Bouton poussoir 10-XX
 
 ### Fonctionnement
 
@@ -87,9 +86,11 @@ La prise en main des programmes requis n’a pas été facile malgré l’intuit
 Nous avons, par souci de disponibilité des programmes, commencé par le schéma du circuit sur Eagle.
 Bien évidemment, nous avons par la suite fait la simulation sur Proteus lorsque nous avions accès à ce programme.
 
-//à compléter!
-
 ### Simulation
+
+La simulation est encore en cours de conception, en même temps que la programmation C.
+Le fichier Proteus ainsi que la programmation en C est d'ores et déjà disponible sur le GitHub même si pas encore finalisé.
+Nous les terminerons sous peu afin de pouvoir continuer la programmation Java.
 
 ### Programmation
 
@@ -114,10 +115,6 @@ Schéma
 Schéma de la plaque de tirage PCB réalisé sur Eagle sans l'isolation par souci de clarté dans le rapport :
 
 ![Plaque de tirage PCB réalisé sur Eagle](pcb.png)
-
-### Schéma du circuit sur Proteus
-
-![Schéma du circuit réalisé sur Proteus](proteus.png)
 
 Répartition du travail
 ----------------------
