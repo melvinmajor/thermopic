@@ -10,8 +10,8 @@ date: 11 mars 2019
 titlepage: true
 footer-left: Melvin, Maxime, Guillaume, Hubert - Groupe 1
 titlepage-color: "ffffff"
-titlepage-text-color: "1565c0"
-titlepage-rule-color: "1565c0"
+titlepage-text-color: "0d47a1"
+titlepage-rule-color: "0d47a1"
 titlepage-rule-height: 6
 toc: true
 toc-own-page: true
