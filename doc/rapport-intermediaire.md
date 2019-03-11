@@ -174,7 +174,7 @@ _**Finalisé le 17 février**_
 Bien qu’un point très important, nous avions fini de choisir les composants nécessaires au projet lorsque nous avions terminé la partie principale du schéma technique sur Eagle.
 Lors des cours, nous avons pu remarquer l’intérêt de certains composants et reprendre ces derniers dans notre schéma afin de finaliser correctement la partie technique de l’électronique du projet.
 
-#### Fichier EAGLE (*.brd) pour tirage PCB (Melvin Campos Casares)
+#### Fichier EAGLE (.brd) pour tirage PCB (Melvin Campos Casares)
 
 _**Echéance le 11 mars à 17h**_ - _**Finalisé le 28 février**_
 
@@ -235,3 +235,11 @@ De plus, ne pas se limiter à la théorie et réaliser un projet concret m’a p
 
 Conclusion
 ----------
+
+Ce projet nous permet de pouvoir utiliser les connaissances apprises en cours de manière concrète et différente que dans des cas isolés levés dans le cadre des laboratoires mis en place lors des travaux pratiques.
+
+Nous avons hâte d'avancer dans ce projet et rendre ThermoPIC totalement fonctionnel.
+
+En conclusion, la réalisation du projet s'est globalement bien déroulée.
+Nous avons atteint la plupart des objectifs fixés au départ lors de cette première partie et certains de ceux-ci ont été adaptés afin que, malgré le retard sur nos propres deadlines fixé, nous ayons corrigé certains problèmes rencontrés et amélioré certains points.
+Nous avons d'ores et déjà quelques pistes d'améliorations que nous tenterons de réaliser lors de la suite de ce projet.
