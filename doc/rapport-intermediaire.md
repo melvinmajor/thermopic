@@ -3,7 +3,7 @@ title: Rapport intermédiaire - ThermoPIC
 subtitle: EPHEC - Groupe 1
 author: 
     - Melvin Campos Casares
-    - Maxime De Cock
+    - Maxime de Cock
     - Guillaume Vanden Herrewegen
     - Hubert Van De Walle
 date: 11 mars 2019
@@ -222,7 +222,7 @@ N'ayant pas de facilité à la programmation en C, pouvoir discuter de certains 
 
 Mêler de la programmation avec de l'électronique et obtenir quelque chose de concret et fonctionnel au quotidien est mon attente principale pour ce projet.
 
-### Maxime De Cock
+### Maxime de Cock
 
 Dès l'annonce du projet, j'ai été très enthousiaste à l'idée de faire ce montage, j'ai donc demandé à mes coéquipiers de me laisser la partie schéma électronique. 
 J'aime vraiment ça, c'est pourquoi j'attends beaucoup de ce projet, entre l'apprentissage des différents langages/programmes et la compréhension des datasheet, ce sont mes premiers vrais objectifs.
