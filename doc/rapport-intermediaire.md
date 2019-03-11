@@ -7,10 +7,16 @@ author:
     - Hubert Van De Walle
 date: 11 mars 2019
 titlepage: true
+footer-left: Melvin, Maxime, Guillaume, Hubert
+titlepage-color: "1565C0"
+titlepage-text-color: "ffffff"
+titlepage-rule-color: "ffffff"
+titlepage-rule-height: 4
+toc: true
+toc-own-page: true
+listing: false
+toc-title: Rapport intermédiaire ThermoPic - groupe 1
 ---
-
-Rapport intermédiaire - ThermoPIC (Groupe 1)
-============================================
 
 Objectifs du projet
 -------------------
