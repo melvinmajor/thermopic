@@ -1,5 +1,6 @@
 ---
 title: Rapport intermédiaire - ThermoPIC
+subtitle: EPHEC - Groupe 1
 author: 
     - Melvin Campos Casares
     - Maxime De Cock
@@ -7,15 +8,15 @@ author:
     - Hubert Van De Walle
 date: 11 mars 2019
 titlepage: true
-footer-left: Melvin, Maxime, Guillaume, Hubert
-titlepage-color: "1565C0"
-titlepage-text-color: "ffffff"
-titlepage-rule-color: "ffffff"
-titlepage-rule-height: 4
+footer-left: Melvin, Maxime, Guillaume, Hubert - Groupe 1
+titlepage-color: "ffffff"
+titlepage-text-color: "1565c0"
+titlepage-rule-color: "1565c0"
+titlepage-rule-height: 6
 toc: true
 toc-own-page: true
 listing: false
-toc-title: Rapport intermédiaire ThermoPic - groupe 1
+toc-title: Rapport intermédiaire ThermoPIC - Groupe 1
 ---
 
 Objectifs du projet
