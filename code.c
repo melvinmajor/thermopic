@@ -28,11 +28,12 @@ void main()
    while(TRUE)
    {
       set_adc_channel(0);//set the pic to read from AN0
-      delay_us(20);//delay 20 microseconds to allow PIC to switch to analog channel 0
+      delay_us(10);//delay 20 microseconds to allow PIC to switch to analog channel 0
       temp=read_adc(); //read input from pin AN0: 0<=photo<=255
       output_d(5);
       output_high(pin_b7);
-      affiche(temp*1.25);
+      affiche(temp/2.57);
+      delay_ms(10);
    }
 
 }
