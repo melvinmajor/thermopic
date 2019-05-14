@@ -10,15 +10,15 @@ Used for Thermopic project with 18f458 microship
 
 ==================================================================*/
 
-#include <testCodeC.h>
+#include <main.h>
 #use rs232(baud=57600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8)
 
 char buffer[1];
 
 #int_rda
 void isr(){
-	disable_interrupts(INT_RDA);
-	gets(buffer);
+   disable_interrupts(INT_RDA);
+   gets(buffer);
 }
 
 
@@ -148,12 +148,12 @@ void main()
          if(affTemp > temperatureAlerte){
             ledRedOn();
             ledGreenOff(); 
-			//printf("%c", buffer[0]);
+         //printf("%c", buffer[0]);
          }
          else{
             ledRedOff();
             ledGreenOn();
-			//printf("%c", buffer[0]);
+         //printf("%c", buffer[0]);
          }
       }
       else if(temp>69){
@@ -162,12 +162,12 @@ void main()
          if(affTemp > temperatureAlerte){
             ledRedOn();
             ledGreenOff(); 
-			//printf("%c", buffer[0]);
+         //printf("%c", buffer[0]);
          }
          else{
             ledRedOff();
             ledGreenOn();
-			//printf("%c", buffer[0]);
+         //printf("%c", buffer[0]);
          }
       }
       else{
@@ -175,12 +175,12 @@ void main()
          if(affTemp > temperatureAlerte){
             ledRedOn();
             ledGreenOff();
-			//printf("%c", buffer[0]);            
+         //printf("%c", buffer[0]);            
          }
          else{
             ledRedOff();
             ledGreenOn();
-			//printf("%c", buffer[0]);
+         //printf("%c", buffer[0]);
          }
       }
       delay_ms(10);
