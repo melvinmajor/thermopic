@@ -12,16 +12,63 @@ titlepage: true
 Rapport final - ThermoPIC
 =========================
 
+Tout est disponible sur GitHub : <https://github.com/melvinmajor/thermopic>
+
+Introduction
+------------
+
 ThermoPIC est un projet consistant en l’application d’une sonde de température envoyant au PIC une mesure analogique de la température ambiante d’une pièce.
 
+Une intégration digitale et un signal d’alerte sont tous deux requis afin de prévenir l’utilisateur de l’éventuel dépassement d’un seuil critique défini par l’utilisateur.
+L’intégration digitale est l’affichage de la température sur un afficheur intégré au circuit, tout comme d’un indicateur sur le programme lancé sur l’ordinateur relié au PIC.
+Le signal d’alerte n’est autre que l’enclenchement d’une LED de couleur rouge et un message d’alerte sur l’ordinateur relié.
+
 Ce projet est à construire de A à Z, dans le sens où il nous faut schématiser, simuler, mais également programmer l’intégralité du circuit électronique choisi.
+
+### Contraintes
+
+_Certaines contraintes nous ont été imposée._
+Tout d’abord, la communication entre le circuit et l’ordinateur doit se faire par le biais d’une application écrite en Java.
+De plus, certains composants du circuit sont prédéfinis comme le PIC, la sonde de température, les afficheurs 7 segments et des LED (une rouge et une verte).
+La sonde température doit fonctionner dans la gamme de 0°C à 100°C **minimum**, les afficheurs 7 segments doivent servir à l’affichage de la température et les LED aux alertes (LED rouge clignotante si alerte, LED verte continue si aucune alerte en cours).
+
+La programmation du PIC est possible via l’interface RS232 ou via l’utilisation d’un module FTDI permettant la conversion du port série en port mini-USB.
+
+### Matériel nécessaire
+
+1. PIC 18F458
+2. Sonde température LM35
+3. Amplificateur LM324
+4. Crystal XTALS
+5. Port série et convertisseur série MAX232
+6. Deux afficheurs 7 segments à cathodes communes HD-1103
+7. Alimentation 5V
+8. Pin Header PINHD-1X3
+9. Résistances, bouton poussoir 10-XX, LED rouge et verte LED3MM et/ou LED5MM
+
+### Performance
+
+Nous avons pensé en groupe qu'il serait intéressant de réduire la consommation électrique et le besoin en composants de notre prototype afin que celui-ci respecte au mieux les désires de chacun.
+Pour respecter cet engagement, nous avons utilisé un affichage simultané sur deux afficheurs 7 segments et en n'utilisant qu'un seul décodeur à 7 segments.
+Grâce à deux transistors, nous parvenons à choisir sur quel afficheur afficher un chiffre.
+Si on transit rapidement entre les deux afficheurs, l'impact visuel sera inexistant.
+Cette manipulation à permis de réduire de 50% la consommation électrique de l'affichage et l'utilisation d'un seul décodeur 7 segments.
+
+Une autre solution possible, mais plus difficile à mettre en place, serait d'allumer les segments de l'afficheur un par un.
+Seulement, cette option n'utiliserait pas un décodeur et donc nous devrions utiliser 7 sorties du PIC.
+Cette option n'était donc pas envisageable.
 
 Partie technique
 ----------------
 
-### La carte ThermoPIC
+### Fonctionnement
 
-#### Descriptif
+Le fonctionnement de ce circuit repose sur un programme tournant en boucle, qui va à chaque instant donné, récupérer la valeur de la sonde de température et comparer cette valeur à la température maximale entrée par l'utilisateur via une application Java.
+Ce programme va aussi vérifier si une donnée est reçue via son RX envoyée depuis l'application Java vers l'entrée Serial du PIC.
+
+Lors du fonctionnement du circuit, si la température est inférieure à la valeur maximale désirée, une LED verte sera allumée pour signaler que tout va bien.
+Si cette température dépasse la valeur maximale, une LED rouge clignotera pour signaler l'utilisateur que la température maximale a été dépassée.
+L'interface de l'application Java signalera aussi cette alerte.
 
 #### Mode d'emploi
 
@@ -143,4 +190,19 @@ Il a été tenu à jour par tout le groupe et principalement écrit par Melvin s
 
 ### Problèmes rencontrés et solutions apportées
 
-### Limites du systèmes et améliorations possibles
+#### Programmation
+
+Pour la partie programmation, nous avons décidé de partir d'un circuit vide.
+Nous avons ajouté les différentes parties du circuit au fur et à mesure que le code avançait.
+La première partie était l’affichage de la température sur les afficheurs 7 segments.
+Une fois cette partie fonctionnelle, nous avons travaillé sur l’entrée analogique de la sonde de température.
+
+Nous avons eu quelques difficultés concernant cette partie du code car nous n’arrivions pas à visualiser quelle type de valeur le convertisseur analogique numérique sortait.
+Une fois cette valeur « maitrisée », nous l’avons convertie pour qu’elle puisse représenter la température relevée.
+Nous avons ensuite pu afficher aisément la température sur les afficheurs 7 segments.
+
+Conclusion
+==========
+
+Limites du systèmes et améliorations possibles
+----------------------------------------------
