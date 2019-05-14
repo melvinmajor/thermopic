@@ -12,8 +12,6 @@ titlepage: true
 Rapport final - ThermoPIC
 =========================
 
-Tout est disponible sur GitHub : <https://github.com/melvinmajor/thermopic>
-
 Introduction
 ------------
 
@@ -109,6 +107,23 @@ Partie projet
 
 ### Planning du projet
 
+Dans le tableau ci-dessous, la personne principalement en charge est celle indiqué en **gras**.
+
+Date | Description | Personne en charge
+-----|-------------|-------------------
+04/02/2019 | _Création du groupe de discussion sur Signal_ | **Hubert** & Melvin
+04/02/2019 | _Création du [repository GitHub](https://github.com/melvinmajor/thermopic)_ | **Melvin**
+05/02/2019 | _Création du [tableau de planification privé Trello](https://trello.com/b/enrK0mAl/thermopic-project)_ | **Guillaume**
+06/02/2019 | _Choix de l'API de communication sur port série_ | **Hubert**
+08/02/2019 => 21/02/2019 | _Schéma technique Proteus et Eagle_ | **Maxime** & Guillaume
+17/02/2019 | _Sélection des composants électronique_ | Groupe entier (**Maxime**)
+28/02/2019 | _Fichier EAGLE (.brd) pour tirage PCB_ | **Melvin**
+06/03/2019 => ../05/2019 | _Programmation Java_ | Groupe entier (**Hubert**)
+09/03/2019 => ../05/2019 | _Programmation C_ | Groupe entier (**Guillaume**)
+11/03/2019 | _Rapport intermédiaire_ | Groupe entier (**Melvin**)
+26/03/2019 => 30/04/2019 | _Soudures de plaque PCB_ | Groupe entier (**Maxime, Melvin**)
+20/05/2019 | _Rapport final_ | Groupe entier (**Melvin**)
+
 #### Création d’un groupe de discussion sur Signal (Melvin Campos Casares & Hubert Van de Walle)
 
 _**Créé le 4 février à 17h34**_
@@ -126,13 +141,13 @@ Par souci de facilité avec la synchronisation des fichiers, nous utilisons un r
 
 Le repository est public et accessible à l’adresse suivante : [https://github.com/melvinmajor/thermopic](https://github.com/melvinmajor/thermopic)
 
-#### Création du tableau de planification Trello (Guillaume Vanden Herrewegen)
+#### Création du tableau de planification privé Trello (Guillaume Vanden Herrewegen)
 
 _**Créé le 5 février à 19h51**_
 
 Afin de mieux coordonner notre planification et de suivre au plus près nos deadlines, nous utilisons la plateforme Trello qui nous a été conseillée lors de la présentation du projet et du cahier des charges.
 
-Le Trello _"ThermoPic project"_ étant privé, il n’y a pas de lien disponible afin d’y accéder à moins d’être invité à le rejoindre.
+Le Trello [_"ThermoPic project"_](https://trello.com/b/enrK0mAl/thermopic-project) étant privé, il n’y a pas de lien disponible à moins d’être invité à le rejoindre.
 
 #### API de gestion de communication sur le port série (Hubert Van de Walle)
 
@@ -163,23 +178,13 @@ Lors des cours, nous avons pu remarquer l’intérêt de certains composants et 
 
 #### Fichier EAGLE (.brd) pour tirage PCB (Melvin Campos Casares)
 
-_**Echéance le 11 mars à 17h**_ - _**Finalisé le 28 février**_
+_**Echéance le 11 mars à 17h**_ - _**Finalisé le 28 février**_ - _**Modifications mineures le 12 mars avant impression**_
 
 Avec le schéma achevé le 16 février, il n’y avait plus qu’à réaliser le fichier de carte de circuit imprimé (_**.brd**_).
 Pour ce faire, nous sommes partis du schéma Eagle et nous nous sommes rendu compte de certaines modifications à apporter au niveau du schéma afin que notre plaque d'impressions soit correcte.
 De plus, lors du commencement de la programmation du code C, nous avons pu remarquer également certaines modifications à apporter au niveau des résistances choisies, n'entrainant heureusement pas de nouveaux changements au niveau du fichier servant au tirage PCB.
 
-Quelques modifications mineures ont été apportées par la suite afin d'optimiser au mieux notre plaque de tirage et améliorer quelque peu notre schéma technique.
-
-#### Programmation du code C (groupe entier)
-
-_**Commencé le 6 mars**_
-
-La programmation du code C de ce projet est principalement géré par Guillaume Vanden Herrewegen.
-Cela n'empêche que nous nous échangions des informations au fur et à mesure de l'évolution afin de pouvoir avancer lorsque nous rencontrons un problème.
-
-Maxime De Cock à soulevé des points pertinents concernant la partie électronique à devoir tenir compte pour la programmation en C alors que Hubert Van De Walle et Melvin Campos Casares ont plus aidé concernant les choix et directives à prendre afin de contrecarrer certains problèmes rencontrés.
-A l'heure actuelle, Guillaume Vanden Herrewegen est la personne principale ayant écrit le code C et ayant réalisé les tests préalables permettant de s'assurer du bon fonctionnement.
+Quelques modifications mineures ont été apportées par la suite afin d'optimiser au mieux notre plaque de tirage et améliorer quelque peu notre schéma technique suite aux retours données par Eurocircuit.
 
 #### Rapport intermédiaire (groupe entier)
 
@@ -187,6 +192,51 @@ _**Echéance le 11 mars à 17h**_
 
 Le rapport intermédiaire fut commencé le 8 février et complété au fur et à mesure de l’avancement du projet.
 Il a été tenu à jour par tout le groupe et principalement écrit par Melvin sur base des retours des autres membres du groupe.
+
+#### Programmation du code Java (groupe entier)
+
+_**Commencé le 6 mars**_
+
+La programmation du code Java de ce projet est principalement géré par Hubert Van De Walle.
+Cela n'empêche que nous nous échangions des informations au fur et à mesure de l'évolution afin de pouvoir avancer lorsque nous rencontrons un problème.
+
+Hubert ayant mis en avant l'intérêt pour l'utilisation d'une API plus pertinente dans le cadre de l'intéraction entre la programmation C et la programamtion Java, il est la personne idéale pour gérer la programmation Java.
+
+#### Programmation du code C (groupe entier)
+
+_**Commencé le 9 mars**_
+
+La programmation du code C de ce projet est principalement géré par Guillaume Vanden Herrewegen.
+Cela n'empêche que nous nous échangions des informations au fur et à mesure de l'évolution afin de pouvoir avancer lorsque nous rencontrons un problème.
+
+Maxime De Cock à soulevé des points pertinents concernant la partie électronique à devoir tenir compte pour la programmation en C alors que Hubert Van De Walle et Melvin Campos Casares ont plus aidé concernant les choix et directives à prendre afin de contrecarrer certains problèmes rencontrés.
+Guillaume Vanden Herrewegen est la personne principale ayant écrit le code C et ayant réalisé les tests préalables permettant de s'assurer du bon fonctionnement.
+
+Initialement prévu le 24 février, le commencement de la programmation C fut le 9 mars suite à un retard occasionné par le schéma Proteus à finaliser.
+
+#### Soudures de plaque PCB (groupe entier)
+
+_**Commencé le 26 mars**_ - _**Finalisé le 30 avril**_
+
+Guillaume Vanden Herrewegen et Melvin Campos Casares sont les personnes principalement en charge des soudures sur la plaque PCB.
+
+Nous avons réalisé les soudures principalement lors de moments prévu dans le cadre des cours pratique d'_électronique digital et analyse des signaux_.
+
+Maxime De Cock, Guillaume Vanden Herrewegen et Melvin Campos Casares se sont organisé pour se voir pendant les vacances de Pâques afin d'avancer encore un peu dans le cadre des soudures et réaliser une première étape des vérifications des soudures déjà réalisée.
+
+Melvin à par ailleurs finalisé les vérifications des soudures chez lui après l'entrevue avec Maxime et Guillaume.
+
+Le groupe au complet à refait une dernière vérification après les dernières soudures le 30 avril et nous nous sommes rendu compte d'une connexion ne se réalisant pas.
+Cela à impliqué le besoin de mettre en place un câble en cuivre afin que la connexion puisse se faire entre la puce RS232 et un des condensateurs.
+
+#### Rapport final (groupe entier)
+
+_**Echéance le 20 mai**_
+
+Le rapport final fut commencé après la remise du rapport intermédiaire.
+Nous sommes parti du rapport intermédiaire et avons supprimé les parties qui n'étaient plus pertinent et avons ajouté au fur et à mesure les nouveaux éléments demandés.
+
+Il a été tenu à jour et écrit par Melvin sur base des retours des autres membres du groupe.
 
 ### Problèmes rencontrés et solutions apportées
 
@@ -201,8 +251,32 @@ Nous avons eu quelques difficultés concernant cette partie du code car nous n�
 Une fois cette valeur « maitrisée », nous l’avons convertie pour qu’elle puisse représenter la température relevée.
 Nous avons ensuite pu afficher aisément la température sur les afficheurs 7 segments.
 
+#### Diminution du nombre de résistances
+
+Nous utilisions au départ 7 résistances pour les afficheurs 7 segments.
+En ne mettant qu'une seule résistance sur la cathode commune des afficheurs 7 segments, cela permets de réduire le nombre de résistances utilisées, réduire les coûts mais malgré tout garder un minimum de protection.
+Etant donné que nous n'envoyons pas de valeurs excessives, cette solution à été appliquée lors de la création de la plaque de tirage PCB.
+
+#### Soudures de la plaque PCB
+
+Le groupe au complet à fait une dernière vérification après les dernières soudures le 30 avril et nous nous sommes rendu compte d'une connexion ne se réalisant pas.
+Cela à impliqué le besoin de mettre en place un câble en cuivre afin que la connexion puisse se faire entre la puce RS232 et un des condensateurs.
+
 Conclusion
 ==========
 
 Limites du systèmes et améliorations possibles
 ----------------------------------------------
+
+### Rendre la plaque moins énergivore
+
+En ajoutant une puce LM555 connectée à la LED rouge, la LED clignote sans pour autant éteindre le signal de base.
+Une interprétation sur base d'une fonction dans la puce permet, sur base d'une valeur simple envoyée à la LM555, de gérer l'intéraction avec la LED.
+Par conséquent, l'envoi d'un signal constant permet de réduire la consommation énergétique puisque la LM555 enverra le signal rapide afin de faire clignoter la LED.
+
+Nous aurions pu également utiliser la LM555 pour les afficheurs 7 segments afin d'envoyer un signal constant et, par ce biais, faire en sorte que cette puce gère l'affichage des valeurs sur les afficheurs.
+
+### Amélioration liée à la LM324
+
+En utilisant une autre puce que la LM324, nous aurions pu éviter le fait que la LM324 renvoie une valeur entre 0 et 4V impliquant une conversion dans le code insérée dans le PIC 18F458.
+Cela aurait pu donc alléger la programmation C.
