@@ -1,39 +1,190 @@
+/*================================================================
+
+Code from:
+- Maxime De Cock
+- Melvin Campos
+- Hubert Van De Walle
+- Guillaume Vanden Herrewegen
+
+Used for Thermopic project with 18f458 microship
+
+==================================================================*/
+
 #include <testCodeC.h>
+#use rs232(baud=57600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8)
+
+char buffer[1];
+
+#int_rda
+void isr(){
+	disable_interrupts(INT_RDA);
+	gets(buffer);
+}
+
+
+/*
+   Cette fonction permet de sortir un nombre sur 4 pins au lieu de 8
+*/
+void sortie(int nbr){
+   switch(nbr){
+         case 0 :  output_low(pin_d0);
+                   output_low(pin_d1);
+                   output_low(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 1 :  output_high(pin_d0);
+                   output_low(pin_d1);
+                   output_low(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 2 :  output_low(pin_d0);
+                   output_high(pin_d1);
+                   output_low(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 3 :  output_high(pin_d0);
+                   output_high(pin_d1);
+                   output_low(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 4 :  output_low(pin_d0);
+                   output_low(pin_d1);
+                   output_high(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 5 :  output_high(pin_d0);
+                   output_low(pin_d1);
+                   output_high(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 6 :  output_low(pin_d0);
+                   output_high(pin_d1);
+                   output_high(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 7 :  output_high(pin_d0);
+                   output_high(pin_d1);
+                   output_high(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 8 :  output_low(pin_d0);
+                   output_low(pin_d1);
+                   output_low(pin_d2);
+                   output_high(pin_d3);
+                   break;
+         case 9 :  output_high(pin_d0);
+                   output_low(pin_d1);
+                   output_low(pin_d2);
+                   output_high(pin_d3);
+                   break;
+                   
+   }
+}
 
 /*
    Cette fonction permet d'afficher sur 2 afficheurs 7 segments à cathodes communes un nombre à 2 chiffres décimaux
 */
-int temp;
+
 void affiche(int nbr){
    
    int nbr1 = nbr/10;
    int nbr2 = nbr%10;
-   output_high(pin_b6);
-   output_low(pin_b7);
-   output_d(nbr1);
+   output_high(pin_d4);
+   output_low(pin_d5);
+   sortie(nbr1);
    delay_ms(10);
-   output_high(pin_b7);
-   output_low(pin_b6);
-   output_d(nbr2);
+   output_high(pin_d5);
+   output_low(pin_d4);
+   sortie(nbr2);
    delay_ms(10);
+   delay_ms(10);
+
+
 
 }
 
+void ledRedOn(){
+   output_high(pin_d6);
+}
+
+void ledRedOff(){
+   output_low(pin_d6);
+}
+
+void ledGreenOn(){
+   output_high(pin_d7);
+}
+
+void ledGreenOff(){
+   output_low(pin_d7);
+}
+
+
 void main()
 {
+   unsigned long temp;
+   long affTemp;
+   
    setup_adc(ADC_CLOCK_DIV_32); //configure analog to digiral converter
    setup_adc_ports(ALL_ANALOG); 
    set_adc_channel(0);
    output_high(pin_e0);
+   
+   int temperatureAlerte = 25;   // température maximale
+    
+   
    while(TRUE)
    {
       set_adc_channel(0);//set the pic to read from AN0
-      delay_us(10);//delay 20 microseconds to allow PIC to switch to analog channel 0
-      temp=read_adc(); //read input from pin AN0: 0<=photo<=255
-      output_d(5);
-      output_high(pin_b7);
-      affiche(temp/2.57);
+      delay_us(10);//delay 10 microseconds to allow PIC to switch to analog channel 0
+      temp=read_adc()/10; //read input from pin AN0: 0<=photo<=255
+      
+      
+      affTemp = temp;
+
+      if(temp>25 && temp<69){
+         affTemp = temp - 1;
+         affiche(affTemp);
+         if(affTemp > temperatureAlerte){
+            ledRedOn();
+            ledGreenOff(); 
+			//printf("%c", buffer[0]);
+         }
+         else{
+            ledRedOff();
+            ledGreenOn();
+			//printf("%c", buffer[0]);
+         }
+      }
+      else if(temp>69){
+         affTemp = temp - 2;
+         affiche(affTemp);
+         if(affTemp > temperatureAlerte){
+            ledRedOn();
+            ledGreenOff(); 
+			//printf("%c", buffer[0]);
+         }
+         else{
+            ledRedOff();
+            ledGreenOn();
+			//printf("%c", buffer[0]);
+         }
+      }
+      else{
+         affiche(affTemp);
+         if(affTemp > temperatureAlerte){
+            ledRedOn();
+            ledGreenOff();
+			//printf("%c", buffer[0]);            
+         }
+         else{
+            ledRedOff();
+            ledGreenOn();
+			//printf("%c", buffer[0]);
+         }
+      }
       delay_ms(10);
    }
 
 }
+
