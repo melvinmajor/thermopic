@@ -44,15 +44,18 @@ La programmation du PIC est possible via l’interface RS232 ou via l’utilisat
 8. Pin Header PINHD-1X3
 9. Résistances, bouton poussoir 10-XX, LED rouge et verte LED3MM et/ou LED5MM
 
-### PerformanceNous avons pensé en groupe qu'il serait intéressant de réduire la consommation électrique et le besoin en composants de notre prototype afin que celui-ci respecte au mieux les désires de chacun.
+### Performance
+
+Nous avons pensé en groupe qu'il serait intéressant de réduire la consommation électrique et le besoin en composants de notre prototype afin que celui-ci respecte au mieux les désires de chacun.
 Pour respecter cet engagement, nous avons utilisé un affichage simultané sur deux afficheurs 7 segments et en n'utilisant qu'un seul décodeur à 7 segments.
+
 Grâce à deux transistors, nous parvenons à choisir sur quel afficheur afficher un chiffre.
-Si on transit rapidement entre les deux afficheurs, l'impact visuel sera inexistant.
+Si on transite rapidement entre les deux afficheurs, l'impact visuel sera inexistant.
 Cette manipulation à permis de réduire de 50% la consommation électrique de l'affichage et l'utilisation d'un seul décodeur 7 segments.
 
 Une autre solution possible, mais plus difficile à mettre en place, serait d'allumer les segments de l'afficheur un par un.
 Seulement, cette option n'utiliserait pas un décodeur et donc nous devrions utiliser 7 sorties du PIC.
-Cette option n'était donc pas envisageable.
+Cette option n'était donc pas envisageable étant donné la taille de la plaque et la place à prévoir pour toutes les connexions ainsi que tous les composants.
 
 Partie technique
 ----------------
