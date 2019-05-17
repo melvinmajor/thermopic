@@ -74,15 +74,211 @@ L'interface de l'application Java signalera aussi cette alerte.
 
 #### Logique
 
+![Schéma du circuit réalisé sur Proteus](schema-logic.png)
+
 #### PCB
 
 ![Schéma du circuit réalisé sur Eagle](schema.png)
 
-Schéma de la plaque de tirage PCB réalisé sur Eagle sans l'isolation par souci de clarté dans le rapport :
-
 ![Plaque de tirage PCB réalisé sur Eagle](pcb.png)
 
+![Plaque de tirage PCB, avec isolation, réalisé sur Eagle](pcb-isolated.png)
+
 ### Code C
+
+#### main.h
+
+```C
+#include <18F458.h>
+#device ADC=10
+
+#FUSES NOWDT                    /*No Watch Dog Timer*/
+
+#use delay(crystal=20000000)
+
+#define LED PIN_D4
+#define DELAY 1000
+
+```
+
+#### code.c
+
+```C
+/*================================================================
+Code from:
+- Maxime De Cock
+- Melvin Campos
+- Hubert Van De Walle
+- Guillaume Vanden Herrewegen
+
+Used for Thermopic project with 18f458 microship
+==================================================================*/
+
+#include <main.h>
+#use rs232(baud=57600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8)
+
+char buffer[1];
+
+#int_rda
+void isr(){
+   disable_interrupts(INT_RDA);
+   gets(buffer);
+}
+
+/*
+   Cette fonction permet de sortir un nombre sur 4 pins au lieu de 8
+*/
+void sortie(int nbr){
+   switch(nbr){
+         case 0 :  output_low(pin_d0);
+                   output_low(pin_d1);
+                   output_low(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 1 :  output_high(pin_d0);
+                   output_low(pin_d1);
+                   output_low(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 2 :  output_low(pin_d0);
+                   output_high(pin_d1);
+                   output_low(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 3 :  output_high(pin_d0);
+                   output_high(pin_d1);
+                   output_low(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 4 :  output_low(pin_d0);
+                   output_low(pin_d1);
+                   output_high(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 5 :  output_high(pin_d0);
+                   output_low(pin_d1);
+                   output_high(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 6 :  output_low(pin_d0);
+                   output_high(pin_d1);
+                   output_high(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 7 :  output_high(pin_d0);
+                   output_high(pin_d1);
+                   output_high(pin_d2);
+                   output_low(pin_d3);
+                   break;
+         case 8 :  output_low(pin_d0);
+                   output_low(pin_d1);
+                   output_low(pin_d2);
+                   output_high(pin_d3);
+                   break;
+         case 9 :  output_high(pin_d0);
+                   output_low(pin_d1);
+                   output_low(pin_d2);
+                   output_high(pin_d3);
+                   break;
+   }
+}
+
+/*
+   Cette fonction permet d'afficher sur 2 afficheurs 7 segments à cathodes communes un nombre à 2 chiffres décimaux
+*/
+void affiche(int nbr){
+   int nbr1 = nbr/10;
+   int nbr2 = nbr%10;
+   output_high(pin_d4);
+   output_low(pin_d5);
+   sortie(nbr1);
+   delay_ms(10);
+   output_high(pin_d5);
+   output_low(pin_d4);
+   sortie(nbr2);
+   delay_ms(10);
+   delay_ms(10);   
+}
+
+void ledRedOn(){
+   output_high(pin_d6);
+}
+
+void ledRedOff(){
+   output_low(pin_d6);
+}
+
+void ledGreenOn(){
+   output_high(pin_d7);
+}
+
+void ledGreenOff(){
+   output_low(pin_d7);
+}
+
+void main(){
+   unsigned long temp;
+   long affTemp;
+   
+   setup_adc(ADC_CLOCK_DIV_32); //configure analog to digiral converter
+   setup_adc_ports(ALL_ANALOG); 
+   set_adc_channel(0);
+   output_high(pin_e0);
+   
+   int temperatureAlerte = 25;   // température maximale
+   
+   while(TRUE){
+      set_adc_channel(0);//set the pic to read from AN0
+      delay_us(10);//delay 10 microseconds to allow PIC to switch to analog channel 0
+      temp=read_adc()/10; //read input from pin AN0: 0<=photo<=255
+      
+      affTemp = temp;
+      
+      if(temp>25 && temp<69){
+         affTemp = temp - 1;
+         affiche(affTemp);
+         if(affTemp > temperatureAlerte){
+            ledRedOn();
+            ledGreenOff(); 
+         //printf("%c", buffer[0]);
+         }
+         else{
+            ledRedOff();
+            ledGreenOn();
+         //printf("%c", buffer[0]);
+         }
+      }
+      else if(temp>69){
+         affTemp = temp - 2;
+         affiche(affTemp);
+         if(affTemp > temperatureAlerte){
+            ledRedOn();
+            ledGreenOff(); 
+         //printf("%c", buffer[0]);
+         }
+         else{
+            ledRedOff();
+            ledGreenOn();
+         //printf("%c", buffer[0]);
+         }
+      }
+      else{
+         affiche(affTemp);
+         if(affTemp > temperatureAlerte){
+            ledRedOn();
+            ledGreenOff();
+         //printf("%c", buffer[0]);            
+         }
+         else{
+            ledRedOff();
+            ledGreenOn();
+         //printf("%c", buffer[0]);
+         }
+      }
+      delay_ms(10);
+   }
+}
+```
 
 ### Code Java
 
@@ -91,6 +287,10 @@ Schéma de la plaque de tirage PCB réalisé sur Eagle sans l'isolation par souc
 Voici les tests effectués et leurs résultats :
 
 ### Conformité par rapport au cahier des charges
+
+Tous les composants précisé dans le cahier des charges ont été tenu en compte et sont présent sur ThermoPIC.
+
+La programmation C, en mode simulation, fonctionne sans le moindre problème.
 
 ### Caractéristiques techniques
 
@@ -115,13 +315,13 @@ Date | Description | Personne en charge
 04/02/2019 | _Création du [repository GitHub](https://github.com/melvinmajor/thermopic)_ | **Melvin**
 05/02/2019 | _Création du [tableau de planification privé Trello](https://trello.com/b/enrK0mAl/thermopic-project)_ | **Guillaume**
 06/02/2019 | _Choix de l'API de communication sur port série_ | **Hubert**
-08/02/2019 => 21/02/2019 | _Schéma technique Proteus et Eagle_ | **Maxime** & Guillaume
+08/02/2019 > 21/02/2019 | _Schéma technique Proteus et Eagle_ | **Maxime** & Guillaume
 17/02/2019 | _Sélection des composants électronique_ | Groupe entier (**Maxime**)
 28/02/2019 | _Fichier EAGLE (.brd) pour tirage PCB_ | **Melvin**
-06/03/2019 => ../05/2019 | _Programmation Java_ | Groupe entier (**Hubert**)
-09/03/2019 => ../05/2019 | _Programmation C_ | Groupe entier (**Guillaume**)
+06/03/2019 > 19/05/2019 | _Programmation Java_ | Groupe entier (**Hubert**)
+09/03/2019 > 14/05/2019 | _Programmation C_ | Groupe entier (**Guillaume**)
 11/03/2019 | _Rapport intermédiaire_ | Groupe entier (**Melvin**)
-26/03/2019 => 30/04/2019 | _Soudures de plaque PCB_ | Groupe entier (**Maxime, Melvin**)
+26/03/2019 > 30/04/2019 | _Soudures de plaque PCB_ | **Guillaume**, Maxime, **Melvin**
 20/05/2019 | _Rapport final_ | Groupe entier (**Melvin**)
 
 #### Création d’un groupe de discussion sur Signal (Melvin Campos Casares & Hubert Van de Walle)
@@ -195,12 +395,14 @@ Il a été tenu à jour par tout le groupe et principalement écrit par Melvin s
 
 #### Programmation du code Java (groupe entier)
 
-_**Commencé le 6 mars**_
+_**Commencement prévu le 6 mars**_ - _**Commencé le 17 mai**_
 
 La programmation du code Java de ce projet est principalement géré par Hubert Van De Walle.
 Cela n'empêche que nous nous échangions des informations au fur et à mesure de l'évolution afin de pouvoir avancer lorsque nous rencontrons un problème.
 
 Hubert ayant mis en avant l'intérêt pour l'utilisation d'une API plus pertinente dans le cadre de l'intéraction entre la programmation C et la programamtion Java, il est la personne idéale pour gérer la programmation Java.
+Malheureusement, _Hubert a préféré attendre la fin de la programmation du code C avant de commencer la programmation du code Java_, entraînant un retard conséquent malgré les nombreux avertissements des autres membres du groupe et de le désir de chacun de déjà entamer cette partie.
+Cela dit, malgré les quelques jours restants avant la fin du projet, nous mettons tout en place afin de terminer cette partie et commencer les simulations et tests.
 
 #### Programmation du code C (groupe entier)
 
@@ -261,6 +463,13 @@ Etant donné que nous n'envoyons pas de valeurs excessives, cette solution à é
 
 Le groupe au complet à fait une dernière vérification après les dernières soudures le 30 avril et nous nous sommes rendu compte d'une connexion ne se réalisant pas.
 Cela à impliqué le besoin de mettre en place un câble en cuivre afin que la connexion puisse se faire entre la puce RS232 et un des condensateurs.
+
+#### Court-circuit dans la plaque PCB
+
+Nous avons détecté un court-circuit au niveau de la plaque PCB malgré que toutes les soudures soient correctes.
+Cela explique l'impossibilité de flasher le PIC et également de tester concrètement et hors simulation notre projet fini.
+
+Nous tentons, à l'heure actuelle, de localiser précisement le court-circuit et d'ainsi la corriger, si possible.
 
 Conclusion
 ==========
