@@ -44,9 +44,7 @@ La programmation du PIC est possible via l’interface RS232 ou via l’utilisat
 8. Pin Header PINHD-1X3
 9. Résistances, bouton poussoir 10-XX, LED rouge et verte LED3MM et/ou LED5MM
 
-### Performance
-
-Nous avons pensé en groupe qu'il serait intéressant de réduire la consommation électrique et le besoin en composants de notre prototype afin que celui-ci respecte au mieux les désires de chacun.
+### PerformanceNous avons pensé en groupe qu'il serait intéressant de réduire la consommation électrique et le besoin en composants de notre prototype afin que celui-ci respecte au mieux les désires de chacun.
 Pour respecter cet engagement, nous avons utilisé un affichage simultané sur deux afficheurs 7 segments et en n'utilisant qu'un seul décodeur à 7 segments.
 Grâce à deux transistors, nous parvenons à choisir sur quel afficheur afficher un chiffre.
 Si on transit rapidement entre les deux afficheurs, l'impact visuel sera inexistant.
@@ -74,11 +72,11 @@ L'interface de l'application Java signalera aussi cette alerte.
 
 #### Logique
 
-![Schéma du circuit réalisé sur Proteus](schema-logic.png)
-
-#### PCB
+![Schéma du circuit réalisé sur Proteus](schema-proteus.png)
 
 ![Schéma du circuit réalisé sur Eagle](schema.png)
+
+#### PCB
 
 ![Plaque de tirage PCB réalisé sur Eagle](pcb.png)
 
@@ -395,7 +393,7 @@ Il a été tenu à jour par tout le groupe et principalement écrit par Melvin s
 
 #### Programmation du code Java (groupe entier)
 
-_**Commencement prévu le 6 mars**_ - _**Commencé le 17 mai**_
+_**Commencement prévu le 6 mars**_ - _**Commencé le 17 mai**_ - _**Finalisé le 19 mai**_
 
 La programmation du code Java de ce projet est principalement géré par Hubert Van De Walle.
 Cela n'empêche que nous nous échangions des informations au fur et à mesure de l'évolution afin de pouvoir avancer lorsque nous rencontrons un problème.
@@ -406,7 +404,7 @@ Cela dit, malgré les quelques jours restants avant la fin du projet, nous metto
 
 #### Programmation du code C (groupe entier)
 
-_**Commencé le 9 mars**_
+_**Commencé le 9 mars**_ - _**Finalisé le 14 mai**_
 
 La programmation du code C de ce projet est principalement géré par Guillaume Vanden Herrewegen.
 Cela n'empêche que nous nous échangions des informations au fur et à mesure de l'évolution afin de pouvoir avancer lorsque nous rencontrons un problème.
