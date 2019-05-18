@@ -71,6 +71,9 @@ L'interface de l'application Java signalera aussi cette alerte.
 
 #### Mode d'emploi
 
+L'utilisation du prototype est extraimement simple. Il suffit d'alimenter en 5v et relier le prototype à un ordinateur via un câble sérial.
+Ensuite il faut lancer l'application Java qui permettra de surveiller et de configurer l'alarme à distance.
+
 ### Schéma électronique
 
 #### Logique
@@ -405,7 +408,7 @@ Hubert ayant mis en avant l'intérêt pour l'utilisation d'une API plus pertinen
 Malheureusement, _Hubert a préféré attendre la fin de la programmation du code C avant de commencer la programmation du code Java_, entraînant un retard conséquent malgré les nombreux avertissements des autres membres du groupe et de le désir de chacun de déjà entamer cette partie.
 Cela dit, malgré les quelques jours restants avant la fin du projet, nous mettons tout en place afin de terminer cette partie et commencer les simulations et tests.
 
-#### Programmation du code C (groupe entier)
+#### Programmation du code C (Groupe entier)
 
 _**Commencé le 9 mars**_ - _**Finalisé le 14 mai**_
 
@@ -463,14 +466,24 @@ Etant donné que nous n'envoyons pas de valeurs excessives, cette solution à é
 #### Soudures de la plaque PCB
 
 Le groupe au complet à fait une dernière vérification après les dernières soudures le 30 avril et nous nous sommes rendu compte d'une connexion ne se réalisant pas.
-Cela à impliqué le besoin de mettre en place un câble en cuivre afin que la connexion puisse se faire entre la puce RS232 et un des condensateurs.
+Cela a impliqué le besoin de mettre en place un câble en cuivre afin que la connexion puisse se faire entre la puce RS232 et un des condensateurs.
+
+Nous avons également rajouté 2 connexions par un câble de cuivre car nous avions un soupçon concernant la fiabilité des soudures concernées. 
 
 #### Court-circuit dans la plaque PCB
 
-Nous avons détecté un court-circuit au niveau de la plaque PCB malgré que toutes les soudures soient correctes.
+Nous avons détecté un court-circuit au niveau de la plaque PCB bien que toutes les soudures soient correctes et vérifiées.
 Cela explique l'impossibilité de flasher le PIC et également de tester concrètement et hors simulation notre projet fini.
 
-Nous tentons, à l'heure actuelle, de localiser précisement le court-circuit et d'ainsi la corriger, si possible.
+Pour tenter de trouver la solution, voici les différentes étapes réalisées :
+
+    * Vérification de toutes les soudures via un test de connectivité.
+    * Mise en place de câbles pour remplacer des soudures imparfaites.
+    * Vérification du fonctionnement de chaque composant du circuit.
+    * Vérification de tous les circuits sur base du schéma Eagle.
+    * Vérification de tous les circuits sur base de la simulation Proteus.
+
+Aucune solution n'a été trouvé suite à toutes ces recherches.
 
 Conclusion
 ==========
