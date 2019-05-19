@@ -592,3 +592,26 @@ Nous aurions pu également utiliser la LM555 pour les afficheurs 7 segments afin
 
 En utilisant une autre puce que la LM324, nous aurions pu éviter le fait que la LM324 renvoie une valeur entre 0 et 4V impliquant une conversion dans le code insérée dans le PIC 18F458.
 Cela aurait pu alléger la programmation C.
+
+Bibliographie
+=============
+
+Data Sheet
+----------
+
+Tous les data sheet (= fiches techniques) sont disponible sur notre GitHub dans `doc>datasheets`.
+
+- LM35 : National Semiconductor, Texas Instruments
+- LM324 : Fairchild, Motorola
+- MAX232 : Maxime Integrated
+- PIC16F87xA
+- PIC 18Fxx8
+
+Logiciels
+---------
+
+- Eagle : <https://www.autodesk.com/products/eagle/overview>
+- Proteus : <https://www.labcenter.com/>
+- PIC C Compiler
+- Tiny Multi Bootloader: <https://github.com/bobc/Tiny-Multi-Bootloader>
+- JetBrains IntelliJ IDEA Community : <https://www.jetbrains.com/idea/>
