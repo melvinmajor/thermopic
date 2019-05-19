@@ -573,7 +573,7 @@ Quoi qu'il en soit, nous avons globalement bien travaillé en équipe et avons f
 
 ### Maxime De Cock
 
-Après avoir fait mon travail, faire le schématique eagle, j'étais content que notre projet avance. 
+Après avoir fais mon travail, fais le schématique eagle, j'étais content que notre projet avance. 
 Cependant, après plusieurs relecture du schéma je ne vois pas les erreurs, et pourtant notre PCB ne fonctionnne pas, ça n'a pas l'air d'être un court-circuit, notre plaque est bien soudé et nous avons testé chaque connexion.
 
 À part cette mésaventure, le projet s'est bien déroulé, nous nous sommes équitablement partagé les tâches. 
@@ -582,6 +582,10 @@ Je suis un peu déçu du résultat, mais bon, le projet n'est pas totalement un 
 ### Hubert Van De Walle
 
 ### Guillaume Vanden Herrewegen
+
+Malgré le fait que le prototype final ne soit fonctionnel, j'ai trouvé le projet très intéressant. Ayant déjà réalisé des projets en électronique, mais de type Arduino, j'ai pu obersvé un aspect différent de l'électronique. Le code C ne m'a pas posé trop de problème ayant déjà touché à ce langage. 
+
+La gestion du timing a été un peu difficile dans notre groupe. L'application Java n'a été lancé trop tardivement. Nous avons découvert des bugs que nous n'avons pas eu le temps de résoudre à temps.
 
 Limites du systèmes et améliorations possibles
 ----------------------------------------------
