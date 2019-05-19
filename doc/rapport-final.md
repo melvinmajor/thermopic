@@ -575,6 +575,13 @@ Quoi qu'il en soit, nous avons globalement bien travaillé en équipe et avons f
 
 ### Maxime De Cock
 
+Après avoir fait mon travail, faire le schématique eagle, j'étais content que notre projet avance. 
+Cependant, après plusieurs relecture du schéma je ne vois pas les erreurs, et pourtant notre PCB ne fonctionnne pas, ça n'a pas l'air d'être un court-circuit, notre plaque est bien soudé et nous avons testé chaque connexion.
+
+À part cette mésaventure, le projet s'est bien déroulé, nous nous sommes équitablement partagé les tâches. 
+Je suis un peu déçu du résultat, mais bon, le projet n'est pas totalement un échec, alors, positivons en attendant la note. 
+ 
+
 ### Hubert Van De Walle
 
 ### Guillaume Vanden Herrewegen
