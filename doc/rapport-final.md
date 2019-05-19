@@ -71,8 +71,13 @@ L'interface de l'application Java signalera aussi cette alerte.
 
 #### Mode d'emploi
 
-L'utilisation du prototype est extraimement simple. Il suffit d'alimenter en 5v et relier le prototype à un ordinateur via un câble sérial.
+L'utilisation du prototype est extrêmement simple.
+Il suffit d'alimenter en 5V la plaque et de relier le prototype à un ordinateur via un câble sérial.
+Des adaptateurs Série vers USB est l'idéal si l'ordinateur ne dispose pas de port série.
+
 Ensuite il faut lancer l'application Java qui permettra de surveiller et de configurer l'alarme à distance.
+
+Dans le cas où vous n'avez pas une version sufisamment récente de Java, nous vous conseillons d'installer au minimum la version **OpenJDK 11 (LTS)** _(JVM **HotSpot**)_ disponible sur AdoptOpenJDK (Windows/Mac/Linux) : <https://adoptopenjdk.net/>
 
 ### Schéma électronique
 
@@ -102,7 +107,6 @@ Ensuite il faut lancer l'application Java qui permettra de surveiller et de conf
 
 #define LED PIN_D4
 #define DELAY 1000
-
 ```
 
 #### code.c
@@ -290,21 +294,29 @@ void main(){
 
 Voici les tests effectués et leurs résultats :
 
+1. _**Vérification de toutes les connexions sur la plaque PCB avant impression**_
+   Cette vérification à été faite afin d'être sûr qu'il n'y ait pas de pont entre deux connexions.
+   Cela à impliqué quelques changements au niveau conception afin d'avoir suffisamment de place pour que toutes les _routes_ aient leur place.
+2. _**Simulation du code C sous Proteus**_
+   Test du code C élément par élément, aucun problème rencontré.
+   Une fois le code C simulé sur la totalité du circuit, nous avons remarqué une plage non fonctionnelle entre 0° et 10° dû à une différence de tension trop faible pour que le convertisseur le détecte.
+
 ### Conformité par rapport au cahier des charges
 
 Tous les composants précisé dans le cahier des charges ont été tenu en compte et sont présent sur ThermoPIC.
+Comme remarqué sur les différents schémas disponible plus tôt dans ce rapport, nous utilisons les composants suivants :
 
-La programmation C, en mode simulation, fonctionne sans le moindre problème.
+- PIC 18f458,
+- Sonde température LM35,
+- Amplificateur LM324,
+- 2 afficheurs 7 segments (pour montrer la température depuis la plaque),
+- LED rouge et verte (signale l'état du seuil si atteint ou non),
+- Résistances, condensateurs, crystal, bouton poussoir, pin header,
+- Connecteur RS232 avec convertisseur série MAX232 (contrainte provenant du PIC).
 
-### Caractéristiques techniques
+La plaque PCB est conforme aux dimensions prescrites et il y a présence d'une plaque terre entourant le circuit afin de limiter les perturbations électriques et donc, de l'isoler.
 
-#### Sonde
-
-#### PIC
-
-#### Modules
-
-#### ...
+La programmation C, en mode simulation, fonctionne sans le moindre problème en dehors dd la plage 0-10° comme expliqué dans les tests.
 
 Partie projet
 -------------
@@ -373,7 +385,7 @@ Quelques dernières retouches ont été réalisées le 21 février sur Eagle tou
 
 Quelques modifications mineures ont été apportées par la suite afin d'optimiser au mieux notre plaque de tirage et améliorer quelque peu notre schéma technique.
 
-#### Sélection des composants nécessaires au projet (groupe entier)
+#### Sélection des composants nécessaires au projet (Groupe entier)
 
 _**Finalisé le 17 février**_
 
@@ -390,23 +402,24 @@ De plus, lors du commencement de la programmation du code C, nous avons pu remar
 
 Quelques modifications mineures ont été apportées par la suite afin d'optimiser au mieux notre plaque de tirage et améliorer quelque peu notre schéma technique suite aux retours données par Eurocircuit.
 
-#### Rapport intermédiaire (groupe entier)
+#### Rapport intermédiaire (Groupe entier)
 
 _**Echéance le 11 mars à 17h**_
 
 Le rapport intermédiaire fut commencé le 8 février et complété au fur et à mesure de l’avancement du projet.
 Il a été tenu à jour par tout le groupe et principalement écrit par Melvin sur base des retours des autres membres du groupe.
 
-#### Programmation du code Java (groupe entier)
+#### Programmation du code Java (Groupe entier)
 
 _**Commencement prévu le 6 mars**_ - _**Commencé le 17 mai**_ - _**Finalisé le 19 mai**_
 
 La programmation du code Java de ce projet est principalement géré par Hubert Van De Walle.
-Cela n'empêche que nous nous échangions des informations au fur et à mesure de l'évolution afin de pouvoir avancer lorsque nous rencontrons un problème.
+Cela n'empêche que nous nous échangions des informations au fur et à mesure de l'évolution du projet afin de pouvoir centraliser toutes les informations avant le début de la programmation.
 
 Hubert ayant mis en avant l'intérêt pour l'utilisation d'une API plus pertinente dans le cadre de l'intéraction entre la programmation C et la programamtion Java, il est la personne idéale pour gérer la programmation Java.
-Malheureusement, _Hubert a préféré attendre la fin de la programmation du code C avant de commencer la programmation du code Java_, entraînant un retard conséquent malgré les nombreux avertissements des autres membres du groupe et de le désir de chacun de déjà entamer cette partie.
-Cela dit, malgré les quelques jours restants avant la fin du projet, nous mettons tout en place afin de terminer cette partie et commencer les simulations et tests.
+
+Malheureusement, _Hubert a préféré attendre la fin de la programmation du code C avant de commencer la programmation du code Java_, entraînant un retard conséquent malgré les nombreux avertissements des autres membres du groupe et le désir de chacun de déjà entamer cette partie.
+Cela dit, malgré les quelques jours restants avant la fin du projet, nous avons tout mis en place afin de terminer cette partie et commencer les simulations et tests durant le peu de temps imparti.
 
 #### Programmation du code C (Groupe entier)
 
@@ -420,7 +433,7 @@ Guillaume Vanden Herrewegen est la personne principale ayant écrit le code C et
 
 Initialement prévu le 24 février, le commencement de la programmation C fut le 9 mars suite à un retard occasionné par le schéma Proteus à finaliser.
 
-#### Soudures de plaque PCB (groupe entier)
+#### Soudures de plaque PCB (Groupe entier)
 
 _**Commencé le 26 mars**_ - _**Finalisé le 30 avril**_
 
@@ -435,7 +448,7 @@ Melvin à par ailleurs finalisé les vérifications des soudures chez lui après
 Le groupe au complet à refait une dernière vérification après les dernières soudures le 30 avril et nous nous sommes rendu compte d'une connexion ne se réalisant pas.
 Cela à impliqué le besoin de mettre en place un câble en cuivre afin que la connexion puisse se faire entre la puce RS232 et un des condensateurs.
 
-#### Rapport final (groupe entier)
+#### Rapport final (Groupe entier)
 
 _**Echéance le 20 mai**_
 
@@ -446,6 +459,25 @@ Il a été tenu à jour et écrit par Melvin sur base des retours des autres mem
 
 ### Problèmes rencontrés et solutions apportées
 
+#### Compréhension du fonctionnement des composants
+
+Lors de la conception des schémas sur Eagle et Proteus, nous avons été quelque peu ralenti car nous tentions de comprendre le fonctionnement du PIC 18F458 ainsi que de certains autres composants.
+
+Avec les fiches techniques des différents composants (présent sur notre GitHub), nous avons reglé ce problème.
+
+#### Diminution du nombre de résistances
+
+Nous utilisions au départ 7 résistances pour les afficheurs 7 segments.
+En ne mettant qu'une seule résistance sur la cathode commune des afficheurs 7 segments, cela permets de réduire le nombre de résistances utilisées, réduire les coûts mais malgré tout garder un minimum de protection.
+Etant donné que nous n'envoyons pas de valeurs excessives, cette solution à été appliquée lors de la création de la plaque de tirage PCB.
+
+#### Réglage du logiciel Eagle
+
+Pour que le tirage de notre plaque électronique puisse se faire sans encombre, il nous a fallu changer certains réglages du logiciel Eagle.
+
+En effet, lors de la première remise de notre PCB, il s'avère que nos _routes_ soient trop fines afin d'être correctement imprimé par **EuroCircuit**.
+Nous avons adapté certains réglages et réalisé à nouveau les _routes_ afin que notre carte électronique soient accepté par l'entreprise d'impression PCB.
+
 #### Programmation
 
 Pour la partie programmation, nous avons décidé de partir d'un circuit vide.
@@ -453,15 +485,9 @@ Nous avons ajouté les différentes parties du circuit au fur et à mesure que l
 La première partie était l’affichage de la température sur les afficheurs 7 segments.
 Une fois cette partie fonctionnelle, nous avons travaillé sur l’entrée analogique de la sonde de température.
 
-Nous avons eu quelques difficultés concernant cette partie du code car nous n’arrivions pas à visualiser quelle type de valeur le convertisseur analogique numérique sortait.
+Nous avons eu quelques difficultées concernant cette partie du code car nous n’arrivions pas à visualiser quelle type de valeur le convertisseur analogique numérique sortait.
 Une fois cette valeur « maitrisée », nous l’avons convertie pour qu’elle puisse représenter la température relevée.
 Nous avons ensuite pu afficher aisément la température sur les afficheurs 7 segments.
-
-#### Diminution du nombre de résistances
-
-Nous utilisions au départ 7 résistances pour les afficheurs 7 segments.
-En ne mettant qu'une seule résistance sur la cathode commune des afficheurs 7 segments, cela permets de réduire le nombre de résistances utilisées, réduire les coûts mais malgré tout garder un minimum de protection.
-Etant donné que nous n'envoyons pas de valeurs excessives, cette solution à été appliquée lors de la création de la plaque de tirage PCB.
 
 #### Soudures de la plaque PCB
 
@@ -480,13 +506,76 @@ Pour tenter de trouver la solution, voici les différentes étapes réalisées :
     * Vérification de toutes les soudures via un test de connectivité.
     * Mise en place de câbles pour remplacer des soudures imparfaites.
     * Vérification du fonctionnement de chaque composant du circuit.
-    * Vérification de tous les circuits sur base du schéma Eagle.
-    * Vérification de tous les circuits sur base de la simulation Proteus.
+    * Vérification du circuit au complet sur base du schéma Eagle.
+    * Vérification du circuit au complet sur base de la simulation Proteus.
 
-Aucune solution n'a été trouvé suite à toutes ces recherches.
+Aucune solution n'a été trouvée suite à toutes ces recherches.
+
+Objectifs personnels et attentes
+================================
+
+Melvin Campos Casares
+---------------------
+
+Pour ce projet, j'espérais grandement pouvoir enfin comprendre l'utilisation de certains logiciels d'électronique permettant la création d'un schéma ainsi que sa manipulation via simulation.
+De plus, avoir un bon travail d'équipe et s'assurer de tout terminer à temps et à heure pour l'échéance finale est l'un de mes objectifs prioritaires.
+
+N'ayant pas de facilité à la programmation en C, pouvoir discuter de certains points me paraissant plus obscurs avec les autres membres du groupe afin de mieux comprendre et mieux visualiser ce langage est un de mes objectifs _bonus_.
+
+Mêler de la programmation avec de l'électronique et obtenir quelque chose de concret et fonctionnel au quotidien est mon attente principale pour ce projet.
+
+Maxime de Cock
+--------------
+
+Dès l'annonce du projet, j'ai été très enthousiaste à l'idée de faire ce montage, j'ai donc demandé à mes coéquipiers de me laisser la partie schéma électronique.
+
+J'aime vraiment ça, c'est pourquoi j'attends beaucoup de ce projet, entre l'apprentissage des différents langages/programmes et la compréhension des datasheet, ce sont mes premiers vrais objectifs.
+
+Hubert Van De Walle
+-------------------
+
+L’existence d’un projet tel que celui-ci en deuxième année des études TI me semble indispensable.
+En effet, il m'a permis d'avoir une meilleure idée de l'interaction entre l'électronique et la programmation.
+J'ai également découvert les différentes étapes rentrant dans la réalisation d'un circuit imprimé.
+De plus, ne pas se limiter à la théorie et réaliser un projet concret m’a permis, personnellement, de renforcer mon intérêt envers l'électronique.
+
+Guillaume Vanden Herrewegen
+---------------------------
+
+Ayant déjà réalisé des projets en électronique de type Arduino, j'étais vraiment intéressé par ce projet. De plus, nous allions apprendre à manipuler des programmes qui permettent de simuler un circuit électronique.
+
+Grâce à ce projet, j'espère pouvoir m'améliorer dans la gestion de groupe, mais aussi dans l'amélioration de mes compétences en électronique ainsi que pouvoir, suite à l'analyse d'une demande, concevoir et assembler un prototype d'un projet en électronique.
 
 Conclusion
 ==========
+
+Nous avons certes eux des problèmes d'organisation dû, entre autres, par d'autres projets en parallèle mais nous nous en sommes bien sorti pour rattraper ce retard généré au début de ThermoPIC et avons tout mis en oeuvre pour mener à bien ce dernier.
+
+De plus, la communication entre tous les membres du projet fut l'un de nos atouts majeurs afin d'avancer rapidement et bien.
+Il n'a pas été difficile de se concerter afin de planifier des moments de rassemblement pour discuter du projet et avancer sur certains points (soudures, tests accrus de certaines parties du code C, explication de certaines parties moins claires pour certains membres du groupe, etc.)
+
+Le fait qu'il y ait un court-circuit sur la plaque nous contraint à ne pas voir le fruit de notre travail mais les simulations nous prouvent bel et bien la viabilité de ThermoPIC.
+
+En réalisant une nouvelle plaque, il est quasi certain que ThermoPIC verra le jour et soit totalement opérationnel.
+
+Conclusion personnelle
+----------------------
+
+### Melvin Campos Casares
+
+J'ai trouvé ce projet très intéressant, tant par l'approche différente et plus technique que par l'évolution du projet en lui-même.
+Le fait de réaliser la conception et la réalisation m'a beaucoup attiré.
+
+Je trouve dommage que Hubert n'ai pas voulu qu'on commence la partie Java à programmer alors qu'on aurait pu le commencer bien plus tôt.
+Nous aurions pu passer un peu de temps également pour améliorer l'apparence globale de notre programme plutôt que de réaliser quelque chose de simple et fonctionnel dû à un manque de temps pour l'analyse et la conception de la programmation Java.
+
+Quoi qu'il en soit, nous avons globalement bien travaillé en équipe et avons fait notre possible pour mener au mieux ce projet.
+
+### Maxime De Cock
+
+### Hubert Van De Walle
+
+### Guillaume Vanden Herrewegen
 
 Limites du systèmes et améliorations possibles
 ----------------------------------------------
@@ -502,4 +591,4 @@ Nous aurions pu également utiliser la LM555 pour les afficheurs 7 segments afin
 ### Amélioration liée à la LM324
 
 En utilisant une autre puce que la LM324, nous aurions pu éviter le fait que la LM324 renvoie une valeur entre 0 et 4V impliquant une conversion dans le code insérée dans le PIC 18F458.
-Cela aurait pu donc alléger la programmation C.
+Cela aurait pu alléger la programmation C.
