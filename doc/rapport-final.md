@@ -419,9 +419,7 @@ Cela n'empêche que nous nous échangions des informations au fur et à mesure d
 Hubert ayant mis en avant l'intérêt pour l'utilisation d'une API plus pertinente dans le cadre de l'intéraction entre la programmation C et la programamtion Java, il est la personne idéale pour gérer la programmation Java.
 
 Malheureusement, _Hubert a préféré attendre la fin de la programmation du code C avant de commencer la programmation du code Java_, entraînant un retard conséquent malgré les nombreux avertissements des autres membres du groupe et le désir de chacun de déjà entamer cette partie.
-De plus, par ce retard généré, nous n'avons pas utilisé l'API `jSerialComm` pourtant soulevé par Hubert au début du projet.
-Nous nous sommes rabattu sur l'API `RxTx`, plus aisé à implémenter étant donné sa présence plus longue en ligne et, par conséquent, une documentation et de nombreux exemples disponible en ligne.
-Cela dit, malgré les quelques jours restants avant la fin du projet, nous avons tout mis en place afin de terminer cette partie et commencer les simulations et tests durant le peu de temps imparti.
+Cela dit, malgré le commencement de cette partie à un moment très tardif, nous avons tout mis en place afin de terminer cette partie ainsi que de réaliser les simulations et tests durant le peu de temps imparti.
 
 #### Programmation du code C (Groupe entier)
 
@@ -581,7 +579,6 @@ Cependant, après plusieurs relecture du schéma je ne vois pas les erreurs, et 
 À part cette mésaventure, le projet s'est bien déroulé, nous nous sommes équitablement partagé les tâches. 
 Je suis un peu déçu du résultat, mais bon, le projet n'est pas totalement un échec, alors, positivons en attendant la note. 
  
-
 ### Hubert Van De Walle
 
 ### Guillaume Vanden Herrewegen
