@@ -419,6 +419,8 @@ Cela n'empêche que nous nous échangions des informations au fur et à mesure d
 Hubert ayant mis en avant l'intérêt pour l'utilisation d'une API plus pertinente dans le cadre de l'intéraction entre la programmation C et la programamtion Java, il est la personne idéale pour gérer la programmation Java.
 
 Malheureusement, _Hubert a préféré attendre la fin de la programmation du code C avant de commencer la programmation du code Java_, entraînant un retard conséquent malgré les nombreux avertissements des autres membres du groupe et le désir de chacun de déjà entamer cette partie.
+De plus, par ce retard généré, nous n'avons pas utilisé l'API `jSerialComm` pourtant soulevé par Hubert au début du projet.
+Nous nous sommes rabattu sur l'API `RxTx`, plus aisé à implémenter étant donné sa présence plus longue en ligne et, par conséquent, une documentation et de nombreux exemples disponible en ligne.
 Cela dit, malgré les quelques jours restants avant la fin du projet, nous avons tout mis en place afin de terminer cette partie et commencer les simulations et tests durant le peu de temps imparti.
 
 #### Programmation du code C (Groupe entier)
@@ -596,6 +598,11 @@ Cela aurait pu alléger la programmation C.
 Bibliographie
 =============
 
+Divers sites ont été parcouru afin de comprendre correctement les logiciels utilisé ainsi que pour certains besoins plus spécifiques lors de la programmation C.
+De plus, le livre de cours à également servi comme support principal au niveau de certaines data sheet (d'autres ont été prises par la suite pour compléter certaines informations).
+
+Pour la compréhension du port série au sein de Proteus, nous nous sommes appuyé sur le site suivant : <https://www.studentcompanion.net/fr/communication-serie-rs232-avec-microcontroleur-pic-xc8/>
+
 Data Sheet
 ----------
 
@@ -604,8 +611,8 @@ Tous les data sheet (= fiches techniques) sont disponible sur notre GitHub dans 
 - LM35 : National Semiconductor, Texas Instruments
 - LM324 : Fairchild, Motorola
 - MAX232 : Maxime Integrated
-- PIC16F87xA
-- PIC 18Fxx8
+- PIC 16F87xA : Microchip
+- PIC 18Fxx8 : Microchip
 
 Logiciels
 ---------
