@@ -10,15 +10,23 @@ Used for Thermopic project with 18f458 microship
 
 ==================================================================*/
 
-#include <main.h>
+#include <18F458.h>
+#device ADC=10
+
+#FUSES NOWDT
+
+#use delay(crystal=20000000)
+
 #use rs232(baud=57600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8)
 
 char buffer[1];
 
+long affTemp;
+int temperatureAlerte = 25;   // température maximale
+
 #int_rda
 void isr(){
    disable_interrupts(INT_RDA);
-   gets(buffer);
 }
 
 
@@ -120,18 +128,40 @@ void ledGreenOff(){
 }
 
 
+
+char treshstr[3];
+
+boolean flag = 0 ;
+
+
+void verifieTemperature(){
+         if(affTemp > temperatureAlerte){
+            ledRedOn();
+            ledGreenOff(); 
+         }
+         else{
+            ledRedOff();
+            ledGreenOn();
+         }
+}
+
+
+
 void main()
 {
    unsigned long temp;
-   long affTemp;
+   
    
    setup_adc(ADC_CLOCK_DIV_32); //configure analog to digiral converter
    setup_adc_ports(ALL_ANALOG); 
    set_adc_channel(0);
    output_high(pin_e0);
+  
    
-   int temperatureAlerte = 25;   // température maximale
+   int value = 0;
     
+    
+   
    
    while(TRUE)
    {
@@ -141,50 +171,28 @@ void main()
       
       
       affTemp = temp;
+      
+      if(affTemp != value){
+         value = affTemp;
+         printf("hello world");    
+      }
+      printf("hello world \r \n"); 
 
       if(temp>25 && temp<69){
          affTemp = temp - 1;
          affiche(affTemp);
-         if(affTemp > temperatureAlerte){
-            ledRedOn();
-            ledGreenOff(); 
-         //printf("%c", buffer[0]);
-         }
-         else{
-            ledRedOff();
-            ledGreenOn();
-         //printf("%c", buffer[0]);
-         }
+         verifieTemperature();
       }
       else if(temp>69){
          affTemp = temp - 2;
          affiche(affTemp);
-         if(affTemp > temperatureAlerte){
-            ledRedOn();
-            ledGreenOff(); 
-         //printf("%c", buffer[0]);
-         }
-         else{
-            ledRedOff();
-            ledGreenOn();
-         //printf("%c", buffer[0]);
-         }
+         verifieTemperature();
       }
       else{
          affiche(affTemp);
-         if(affTemp > temperatureAlerte){
-            ledRedOn();
-            ledGreenOff();
-         //printf("%c", buffer[0]);            
-         }
-         else{
-            ledRedOff();
-            ledGreenOn();
-         //printf("%c", buffer[0]);
-         }
+         verifieTemperature();
       }
       delay_ms(10);
    }
 
 }
-
