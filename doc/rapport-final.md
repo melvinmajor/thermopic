@@ -57,6 +57,8 @@ Une autre solution possible, mais plus difficile à mettre en place, serait d'al
 Seulement, cette option n'utiliserait pas un décodeur et donc nous devrions utiliser 7 sorties du PIC.
 Cette option n'était donc pas envisageable étant donné la taille de la plaque et la place à prévoir pour toutes les connexions ainsi que tous les composants.
 
+\pagebreak
+
 Partie technique
 ----------------
 
@@ -78,6 +80,7 @@ Des adaptateurs Série vers USB est l'idéal si l'ordinateur ne dispose pas de p
 Ensuite il faut lancer l'application Java qui permettra de surveiller et de configurer l'alarme à distance.
 
 L'interface de l'application Java ressemble à ceci :
+
 ![Interface de l'application Java de ThermoPIC](java.png)
 
 Dans le cas où vous n'avez pas une version sufisamment récente de Java, nous vous conseillons d'installer au minimum la version **OpenJDK 11 (LTS)** _(JVM **HotSpot**)_ disponible sur AdoptOpenJDK (Windows/Mac/Linux) : <https://adoptopenjdk.net/>
@@ -95,6 +98,8 @@ Dans le cas où vous n'avez pas une version sufisamment récente de Java, nous v
 ![Plaque de tirage PCB réalisé sur Eagle](pcb.png)
 
 ![Plaque de tirage PCB, avec isolation, réalisé sur Eagle](pcb-isolated.png)
+
+\pagebreak
 
 ### Code C
 
@@ -202,7 +207,8 @@ void sortie(int nbr){
 }
 
 /*
-   Cette fonction permet d'afficher sur 2 afficheurs 7 segments à cathodes communes un nombre à 2 chiffres décimaux
+   Cette fonction permet d'afficher sur 2 afficheurs 7 segments à cathodes
+   communes un nombre à 2 chiffres décimaux
 */
 void affiche(int nbr){
    int nbr1 = nbr/10;
@@ -263,7 +269,8 @@ void main()
    while(TRUE)
    {
       set_adc_channel(0);//set the pic to read from AN0
-      delay_us(10);//delay 10 microseconds to allow PIC to switch to analog channel 0
+      delay_us(10);//delay 10 microseconds to allow PIC to switch to analog
+                   //channel 0
       temp=read_adc()/10; //read input from pin AN0: 0<=photo<=255
 
       affTemp = temp;
@@ -293,6 +300,8 @@ void main()
 
 }
 ```
+
+\pagebreak
 
 ### Code Java
 
@@ -345,7 +354,8 @@ public class Model {
         }
         if (this.comPort == null) return;
         this.comPort.openPort();
-        comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 100, 0);
+        comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING,
+        100, 0);
 
         comPort.addDataListener(new SerialPortDataListener() {
             @Override
@@ -355,7 +365,8 @@ public class Model {
 
             @Override
             public void serialEvent(SerialPortEvent event) {
-                if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
+                if (event.getEventType() !=
+                SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
                     return;
                 byte[] newData = new byte[comPort.bytesAvailable()];
                 int numRead = comPort.readBytes(newData, newData.length);
@@ -405,12 +416,14 @@ public class View {
 
         exitButton.addActionListener(e -> Controller.instance.exit());
 
-        detectButton.addActionListener(actionEvent -> Controller.instance.detect());
+        detectButton.addActionListener(actionEvent -> 
+        Controller.instance.detect());
 
         connectButton.addActionListener(actionEvent -> {
             String selectedItem = (String) serialComboBox.getSelectedItem();
             if (selectedItem == null) {
-                JOptionPane.showMessageDialog(null, "No serial port selected", "ERROR", ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No serial port selected",
+                 "ERROR", ERROR_MESSAGE);
                 return;
             }
             Controller.instance.setSerial(selectedItem);
@@ -441,6 +454,9 @@ public class View {
 ```
 
 #### View.form
+
+Etant donné la longueur de certaines lignes écrites en `XML` dans le fichier `View.form`, veuillez le lire sur notre GitHub : <https://github.com/melvinmajor/thermopic/blob/master/java/src/thermopic/View.form>
+
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -574,6 +590,8 @@ public interface Listener {
 }
 ```
 
+\pagebreak
+
 ### Tests
 
 Voici les tests effectués et leurs résultats :
@@ -604,6 +622,8 @@ Comme remarqué sur les différents schémas disponible plus tôt dans ce rappor
 La plaque PCB est conforme aux dimensions prescrites et il y a présence d'une plaque terre entourant le circuit afin de limiter les perturbations électriques et donc, de l'isoler.
 
 La programmation C, en mode simulation, fonctionne sans le moindre problème en dehors dd la plage 0-10° comme expliqué dans les tests.
+
+\pagebreak
 
 Partie projet
 -------------
@@ -744,6 +764,8 @@ Nous sommes parti du rapport intermédiaire et avons supprimé les parties qui n
 
 Il a été tenu à jour et écrit par Melvin sur base des retours des autres membres du groupe.
 
+\pagebreak
+
 ### Problèmes rencontrés et solutions apportées
 
 #### Compréhension du fonctionnement des composants
@@ -798,6 +820,8 @@ Pour tenter de trouver la solution, voici les différentes étapes réalisées :
 
 Aucune solution n'a été trouvée suite à toutes ces recherches.
 
+\pagebreak
+
 Objectifs personnels et attentes
 ================================
 
@@ -832,6 +856,8 @@ Guillaume Vanden Herrewegen
 Ayant déjà réalisé des projets en électronique de type Arduino, j'étais vraiment intéressé par ce projet. De plus, nous allions apprendre à manipuler des programmes qui permettent de simuler un circuit électronique.
 
 Grâce à ce projet, j'espère pouvoir m'améliorer dans la gestion de groupe, mais aussi dans l'amélioration de mes compétences en électronique ainsi que pouvoir, suite à l'analyse d'une demande, concevoir et assembler un prototype d'un projet en électronique.
+
+\pagebreak
 
 Conclusion
 ==========
@@ -894,6 +920,8 @@ Nous aurions pu également utiliser la LM555 pour les afficheurs 7 segments afin
 
 En utilisant une autre puce que la LM324, nous aurions pu éviter le fait que la LM324 renvoie une valeur entre 0 et 4V impliquant une conversion dans le code insérée dans le PIC 18F458.
 Cela aurait pu alléger la programmation C.
+
+\pagebreak
 
 Bibliographie
 =============
