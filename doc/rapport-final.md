@@ -1,6 +1,6 @@
 ---
 title: Rapport final - ThermoPIC
-author: 
+author:
     - Melvin Campos Casares
     - Maxime De Cock
     - Guillaume Vanden Herrewegen
@@ -205,7 +205,7 @@ void affiche(int nbr){
    output_low(pin_d4);
    sortie(nbr2);
    delay_ms(10);
-   delay_ms(10);   
+   delay_ms(10);
 }
 
 void ledRedOn(){
@@ -227,27 +227,27 @@ void ledGreenOff(){
 void main(){
    unsigned long temp;
    long affTemp;
-   
+
    setup_adc(ADC_CLOCK_DIV_32); //configure analog to digiral converter
-   setup_adc_ports(ALL_ANALOG); 
+   setup_adc_ports(ALL_ANALOG);
    set_adc_channel(0);
    output_high(pin_e0);
-   
+
    int temperatureAlerte = 25;   // température maximale
-   
+
    while(TRUE){
       set_adc_channel(0);//set the pic to read from AN0
       delay_us(10);//delay 10 microseconds to allow PIC to switch to analog channel 0
       temp=read_adc()/10; //read input from pin AN0: 0<=photo<=255
-      
+
       affTemp = temp;
-      
+
       if(temp>25 && temp<69){
          affTemp = temp - 1;
          affiche(affTemp);
          if(affTemp > temperatureAlerte){
             ledRedOn();
-            ledGreenOff(); 
+            ledGreenOff();
          //printf("%c", buffer[0]);
          }
          else{
@@ -261,7 +261,7 @@ void main(){
          affiche(affTemp);
          if(affTemp > temperatureAlerte){
             ledRedOn();
-            ledGreenOff(); 
+            ledGreenOff();
          //printf("%c", buffer[0]);
          }
          else{
@@ -275,7 +275,7 @@ void main(){
          if(affTemp > temperatureAlerte){
             ledRedOn();
             ledGreenOff();
-         //printf("%c", buffer[0]);            
+         //printf("%c", buffer[0]);
          }
          else{
             ledRedOff();
@@ -372,7 +372,7 @@ _**Finalisé le 6 février**_
 Lors de la présentation du projet et du cahier des charges, il nous a été proposé d’utiliser l’API **RxTx** pour gérer la communication sur le port série.
 En analysant un peu cette API, nous avons pu remarquer qu’elle n’a plus été mise à jour depuis 6 ans et avons donc préféré trouver une autre API, plus récente, et pouvant convenir au projet.
 
-Hubert à trouvé l’API [jSerialComm](https://github.com/Fazecast/jSerialComm), disponible sur GitHub, et permettant d’[utiliser des évènements](https://github.com/Fazecast/jSerialComm/wiki/Event-Based-Reading-Usage-Example).
+Hubert a trouvé l’API [jSerialComm](https://github.com/Fazecast/jSerialComm), disponible sur GitHub, et permettant d’[utiliser des évènements](https://github.com/Fazecast/jSerialComm/wiki/Event-Based-Reading-Usage-Example).
 
 #### Schéma technique sur Proteus et Eagle (Maxime de Cock & Guillaume Vanden Herrewegen)
 
@@ -494,7 +494,7 @@ Nous avons ensuite pu afficher aisément la température sur les afficheurs 7 se
 Le groupe au complet à fait une dernière vérification après les dernières soudures le 30 avril et nous nous sommes rendu compte d'une connexion ne se réalisant pas.
 Cela a impliqué le besoin de mettre en place un câble en cuivre afin que la connexion puisse se faire entre la puce RS232 et un des condensateurs.
 
-Nous avons également rajouté 2 connexions par un câble de cuivre car nous avions un soupçon concernant la fiabilité des soudures concernées. 
+Nous avons également rajouté 2 connexions par un câble de cuivre car nous avions un soupçon concernant la fiabilité des soudures concernées.
 
 #### Court-circuit dans la plaque PCB
 
@@ -573,19 +573,19 @@ Quoi qu'il en soit, nous avons globalement bien travaillé en équipe et avons f
 
 ### Maxime De Cock
 
-Après avoir fais mon travail, fais le schématique eagle, j'étais content que notre projet avance. 
+Après avoir fais mon travail, fais le schématique eagle, j'étais content que notre projet avance.
 Cependant, après plusieurs relecture du schéma je ne vois pas les erreurs, et pourtant notre PCB ne fonctionnne pas, ça n'a pas l'air d'être un court-circuit, notre plaque est bien soudé et nous avons testé chaque connexion.
 
-À part cette mésaventure, le projet s'est bien déroulé, nous nous sommes équitablement partagé les tâches. 
-Je suis un peu déçu du résultat, mais bon, le projet n'est pas totalement un échec, alors, positivons en attendant la note. 
- 
+À part cette mésaventure, le projet s'est bien déroulé, nous nous sommes équitablement partagé les tâches.
+Je suis un peu déçu du résultat, mais bon, le projet n'est pas totalement un échec, alors, positivons en attendant la note.
+
 ### Hubert Van De Walle
 
 ### Guillaume Vanden Herrewegen
 
-Malgré le fait que le prototype final ne soit fonctionnel, j'ai trouvé le projet très intéressant. Ayant déjà réalisé des projets en électronique, mais de type Arduino, j'ai pu obersvé un aspect différent de l'électronique. Le code C ne m'a pas posé trop de problème ayant déjà touché à ce langage. 
+Malgré le fait que le prototype final ne soit pas fonctionnel, j'ai trouvé le projet très intéressant. Ayant déjà réalisé des projets en électronique, mais de type Arduino, j'ai pu observé un aspect différent de l'électronique. Le code C ne m'a pas posé trop de problème ayant déjà touché à ce langage.
 
-La gestion du timing a été un peu difficile dans notre groupe. L'application Java n'a été lancé trop tardivement. Nous avons découvert des bugs que nous n'avons pas eu le temps de résoudre à temps.
+La gestion du timing a été un peu difficile dans notre groupe. L'application Java n'a été lancé que trop tardivement. Nous avons découvert des bugs que nous n'avons pas eu le temps de résoudre à temps.
 
 Limites du systèmes et améliorations possibles
 ----------------------------------------------
