@@ -77,6 +77,9 @@ Des adaptateurs Série vers USB est l'idéal si l'ordinateur ne dispose pas de p
 
 Ensuite il faut lancer l'application Java qui permettra de surveiller et de configurer l'alarme à distance.
 
+L'interface de l'application Java ressemble à ceci :
+![Interface de l'application Java de ThermoPIC](java.png)
+
 Dans le cas où vous n'avez pas une version sufisamment récente de Java, nous vous conseillons d'installer au minimum la version **OpenJDK 11 (LTS)** _(JVM **HotSpot**)_ disponible sur AdoptOpenJDK (Windows/Mac/Linux) : <https://adoptopenjdk.net/>
 
 ### Schéma électronique
@@ -122,15 +125,22 @@ Code from:
 Used for Thermopic project with 18f458 microship
 ==================================================================*/
 
-#include <main.h>
+#include <18F458.h>
+#device ADC=10
+
+#FUSES NOWDT
+
+#use delay(crystal=20000000)
 #use rs232(baud=57600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8)
 
 char buffer[1];
 
+long affTemp;
+int temperatureAlerte = 25;   // température maximale
+
 #int_rda
 void isr(){
    disable_interrupts(INT_RDA);
-   gets(buffer);
 }
 
 /*
@@ -224,71 +234,345 @@ void ledGreenOff(){
    output_low(pin_d7);
 }
 
-void main(){
+char treshstr[3];
+
+boolean flag = 0 ;
+
+void verifieTemperature(){
+         if(affTemp > temperatureAlerte){
+            ledRedOn();
+            ledGreenOff(); 
+         }
+         else{
+            ledRedOff();
+            ledGreenOn();
+         }
+}
+
+void main()
+{
    unsigned long temp;
-   long affTemp;
 
    setup_adc(ADC_CLOCK_DIV_32); //configure analog to digiral converter
-   setup_adc_ports(ALL_ANALOG);
+   setup_adc_ports(ALL_ANALOG); 
    set_adc_channel(0);
    output_high(pin_e0);
+  
+   int value = 0;
 
-   int temperatureAlerte = 25;   // température maximale
-
-   while(TRUE){
+   while(TRUE)
+   {
       set_adc_channel(0);//set the pic to read from AN0
       delay_us(10);//delay 10 microseconds to allow PIC to switch to analog channel 0
       temp=read_adc()/10; //read input from pin AN0: 0<=photo<=255
 
       affTemp = temp;
 
+      if(affTemp != value){
+         value = affTemp;
+         printf("hello world");
+      }
+      printf("hello world \r \n");
+
       if(temp>25 && temp<69){
          affTemp = temp - 1;
          affiche(affTemp);
-         if(affTemp > temperatureAlerte){
-            ledRedOn();
-            ledGreenOff();
-         //printf("%c", buffer[0]);
-         }
-         else{
-            ledRedOff();
-            ledGreenOn();
-         //printf("%c", buffer[0]);
-         }
+         verifieTemperature();
       }
       else if(temp>69){
          affTemp = temp - 2;
          affiche(affTemp);
-         if(affTemp > temperatureAlerte){
-            ledRedOn();
-            ledGreenOff();
-         //printf("%c", buffer[0]);
-         }
-         else{
-            ledRedOff();
-            ledGreenOn();
-         //printf("%c", buffer[0]);
-         }
+         verifieTemperature();
       }
       else{
          affiche(affTemp);
-         if(affTemp > temperatureAlerte){
-            ledRedOn();
-            ledGreenOff();
-         //printf("%c", buffer[0]);
-         }
-         else{
-            ledRedOff();
-            ledGreenOn();
-         //printf("%c", buffer[0]);
-         }
+         verifieTemperature();
       }
       delay_ms(10);
    }
+
 }
 ```
 
 ### Code Java
+
+#### Main.java
+
+```java
+package thermopic;
+
+public class Main {
+    public static void main(String[] args) {
+        View view = new View();
+        Model model = new Model();
+        Controller controller = new Controller(model, view);
+        controller.init();
+    }
+}
+```
+
+#### Model.java
+
+```java
+package thermopic;
+
+import com.fazecast.jSerialComm.SerialPort;
+import com.fazecast.jSerialComm.SerialPortDataListener;
+import com.fazecast.jSerialComm.SerialPortEvent;
+
+public class Model {
+    public static Model instance;
+    private SerialPort comPort;
+    public Listener listener;
+
+    public Model() {
+        instance = this;
+    }
+
+    public void setSerial(String selectedItem) {
+        if (this.comPort != null) {
+            this.comPort.closePort();
+            this.comPort = null;
+        }
+
+        SerialPort[] commPorts = Model.instance.getCommPorts();
+        for (SerialPort commPort : commPorts) {
+            String name = commPort.getSystemPortName();
+            if (name.equals(selectedItem)) {
+                this.comPort = commPort;
+                break;
+            }
+        }
+        if (this.comPort == null) return;
+        this.comPort.openPort();
+        comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 100, 0);
+
+        comPort.addDataListener(new SerialPortDataListener() {
+            @Override
+            public int getListeningEvents() {
+                return SerialPort.LISTENING_EVENT_DATA_AVAILABLE;
+            }
+
+            @Override
+            public void serialEvent(SerialPortEvent event) {
+                if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
+                    return;
+                byte[] newData = new byte[comPort.bytesAvailable()];
+                int numRead = comPort.readBytes(newData, newData.length);
+                Model.this.listener.onRead(newData);
+            }
+        });
+
+    }
+
+    public void write(byte[] value) {
+        if (this.comPort == null) {
+            return;
+        }
+        this.comPort.writeBytes(value, 8);
+    }
+
+    public SerialPort[] getCommPorts() {
+        return SerialPort.getCommPorts();
+    }
+}
+```
+
+#### View.java
+
+```java
+package thermopic;
+
+import javax.swing.*;
+
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+
+public class View {
+    public static View instance;
+
+    private JFrame frame = new JFrame();
+    private JPanel mainPanel;
+    private JLabel label;
+    private JLabel temperatureLabel;
+    private JComboBox<String> serialComboBox;
+    private JButton connectButton;
+    private JButton detectButton;
+    private JButton exitButton;
+    private JTextField alertField;
+
+    public View() {
+        instance = this;
+
+        exitButton.addActionListener(e -> Controller.instance.exit());
+
+        detectButton.addActionListener(actionEvent -> Controller.instance.detect());
+
+        connectButton.addActionListener(actionEvent -> {
+            String selectedItem = (String) serialComboBox.getSelectedItem();
+            if (selectedItem == null) {
+                JOptionPane.showMessageDialog(null, "No serial port selected", "ERROR", ERROR_MESSAGE);
+                return;
+            }
+            Controller.instance.setSerial(selectedItem);
+        });
+    }
+
+    public void start() {
+        frame.setContentPane(new View().mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1380, 820);
+        frame.setVisible(true);
+    }
+
+    public void setTemperature(String label) {
+        temperatureLabel.setText(label);
+    }
+
+    public void setSerials(Iterable<String> entries) {
+        SwingUtilities.invokeLater(() -> {
+            serialComboBox.removeAllItems();
+            for (String entry : entries) {
+                serialComboBox.addItem(entry);
+            }
+        });
+    }
+
+}
+```
+
+#### View.form
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="thermopic.View">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="2264d" class="javax.swing.JLabel" binding="label">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Température :"/>
+        </properties>
+      </component>
+      <component id="37658" class="javax.swing.JButton" binding="connectButton">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Connecter"/>
+        </properties>
+      </component>
+      <component id="3dd15" class="javax.swing.JLabel" binding="temperatureLabel">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="00"/>
+        </properties>
+      </component>
+      <component id="77078" class="javax.swing.JComboBox" binding="serialComboBox">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="10a83" class="javax.swing.JButton" binding="detectButton">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Détecter"/>
+        </properties>
+      </component>
+      <component id="541e6" class="javax.swing.JButton" binding="exitButton">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Quitter"/>
+        </properties>
+      </component>
+      <component id="ad40d" class="javax.swing.JTextField" binding="alertField">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <toolTipText value="Régler alerte"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
+```
+
+#### Controller.java
+
+```java
+package thermopic;
+
+import com.fazecast.jSerialComm.SerialPort;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Controller {
+    public static Controller instance;
+    private final Model model;
+    private final View view;
+
+    public Controller(Model model, View view) {
+        this.view = view;
+        this.model = model;
+        instance = this;
+        model.listener = value -> {
+            //view.setTemperature();
+        };
+    }
+
+    public void init() {
+        view.start();
+    }
+
+    public void setSerial(String selectedItem) {
+        model.setSerial(selectedItem);
+    }
+
+    public void detect() {
+        SerialPort[] commPorts = Model.instance.getCommPorts();
+        List<String> serialNames = new ArrayList<>();
+        for (SerialPort commPort : commPorts) {
+            String name = commPort.getSystemPortName();
+            System.out.println(name);
+            serialNames.add(name);
+        }
+        view.setSerials(serialNames);
+    }
+
+
+    public void exit() {
+        System.exit(0);
+    }
+}
+```
+
+#### Listener.java
+
+```java
+package thermopic;
+
+public interface Listener {
+    void onRead(byte[] value);
+}
+```
 
 ### Tests
 
@@ -300,6 +584,9 @@ Voici les tests effectués et leurs résultats :
 2. _**Simulation du code C sous Proteus**_
    Test du code C élément par élément, aucun problème rencontré.
    Une fois le code C simulé sur la totalité du circuit, nous avons remarqué une plage non fonctionnelle entre 0° et 10° dû à une différence de tension trop faible pour que le convertisseur le détecte.
+3. _**Débogage de Java (via un port série avec un port virtuel)**_
+   Le code C n'envoie que des 0 dans le port série, ce qui n'est pas censé être le cas.
+   Par contre, en envoyant directement depuis l'application Java, la transmission des informations se fait correctement.
 
 ### Conformité par rapport au cahier des charges
 
@@ -334,7 +621,7 @@ Date | Description | Personne en charge
 08/02/2019 > 21/02/2019 | _Schéma technique Proteus et Eagle_ | **Maxime** & Guillaume
 17/02/2019 | _Sélection des composants électronique_ | Groupe entier (**Maxime**)
 28/02/2019 | _Fichier EAGLE (.brd) pour tirage PCB_ | **Melvin**
-06/03/2019 > 19/05/2019 | _Programmation Java_ | Groupe entier (**Hubert**)
+06/03/2019 > ? | _Programmation Java_ | Groupe entier (**Hubert**)
 09/03/2019 > 14/05/2019 | _Programmation C_ | Groupe entier (**Guillaume**)
 11/03/2019 | _Rapport intermédiaire_ | Groupe entier (**Melvin**)
 26/03/2019 > 30/04/2019 | _Soudures de plaque PCB_ | **Guillaume**, Maxime, **Melvin**
@@ -411,7 +698,7 @@ Il a été tenu à jour par tout le groupe et principalement écrit par Melvin s
 
 #### Programmation du code Java (Groupe entier)
 
-_**Commencement prévu le 6 mars**_ - _**Commencé le 17 mai**_ - _**Finalisé le 19 mai**_
+_**Commencement prévu le 6 mars**_ - _**Commencé le 17 mai**_
 
 La programmation du code Java de ce projet est principalement géré par Hubert Van De Walle.
 Cela n'empêche que nous nous échangions des informations au fur et à mesure de l'évolution du projet afin de pouvoir centraliser toutes les informations avant le début de la programmation.
@@ -419,7 +706,7 @@ Cela n'empêche que nous nous échangions des informations au fur et à mesure d
 Hubert ayant mis en avant l'intérêt pour l'utilisation d'une API plus pertinente dans le cadre de l'intéraction entre la programmation C et la programamtion Java, il est la personne idéale pour gérer la programmation Java.
 
 Malheureusement, _Hubert a préféré attendre la fin de la programmation du code C avant de commencer la programmation du code Java_, entraînant un retard conséquent malgré les nombreux avertissements des autres membres du groupe et le désir de chacun de déjà entamer cette partie.
-Cela dit, malgré le commencement de cette partie à un moment très tardif, nous avons tout mis en place afin de terminer cette partie ainsi que de réaliser les simulations et tests durant le peu de temps imparti.
+Cela dit, malgré le commencement de cette partie à un moment très tardif, nous avons tout mis en place afin d'avancer au maximum dans cette partie.
 
 #### Programmation du code C (Groupe entier)
 
