@@ -581,6 +581,11 @@ Je suis un peu déçu du résultat, mais bon, le projet n'est pas totalement un 
 
 ### Hubert Van De Walle
 
+Pour ma part, j'ai aidé mon groupe pour corriger des problèmes rencontrés en C et ait pris en charge Java.
+
+Grâce à ce projet, j'ai pu voir l'interaction entre l'électronique et la programmation de façon plus approfondie.
+La réalisation d'un circuit imprimé et lier la théorie vue en cours avec une mise en pratique a permis de renforcer mon intérêt tant en informatique qu'envers l'électronique.
+
 ### Guillaume Vanden Herrewegen
 
 Malgré le fait que le prototype final ne soit pas fonctionnel, j'ai trouvé le projet très intéressant. Ayant déjà réalisé des projets en électronique, mais de type Arduino, j'ai pu observé un aspect différent de l'électronique. Le code C ne m'a pas posé trop de problème ayant déjà touché à ce langage.
