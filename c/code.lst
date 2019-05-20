@@ -1,0 +1,658 @@
+CCS PCH C Compiler, Version 5.008, 5967               14-mai-19 17:38
+
+               Filename:   D:\Git\thermopic\c\code.lst
+
+               ROM used:   958 bytes (3%)
+                           Largest free fragment is 31806
+               RAM used:   29 (2%) at main() level
+                           35 (2%) worst case
+               Stack used: 4 locations (3 in main + 1 for interrupts)
+               Stack size: 31
+
+*
+0000:  GOTO   02A4
+*
+0008:  MOVWF  04
+000A:  MOVFF  FD8,05
+000E:  MOVFF  FE0,06
+0012:  MOVLB  0
+0014:  MOVFF  FE9,0C
+0018:  MOVFF  FEA,07
+001C:  MOVFF  FE1,08
+0020:  MOVFF  FE2,09
+0024:  MOVFF  FD9,0A
+0028:  MOVFF  FDA,0B
+002C:  MOVFF  FF3,12
+0030:  MOVFF  FF4,13
+0034:  MOVFF  FFA,14
+0038:  MOVFF  00,0E
+003C:  MOVFF  01,0F
+0040:  MOVFF  02,10
+0044:  MOVFF  03,11
+0048:  BTFSS  F9D.5
+004A:  GOTO   0054
+004E:  BTFSC  F9E.5
+0050:  GOTO   0096
+0054:  MOVFF  0E,00
+0058:  MOVFF  0F,01
+005C:  MOVFF  10,02
+0060:  MOVFF  11,03
+0064:  MOVFF  0C,FE9
+0068:  MOVFF  07,FEA
+006C:  BSF    07.7
+006E:  MOVFF  08,FE1
+0072:  MOVFF  09,FE2
+0076:  MOVFF  0A,FD9
+007A:  MOVFF  0B,FDA
+007E:  MOVFF  12,FF3
+0082:  MOVFF  13,FF4
+0086:  MOVFF  14,FFA
+008A:  MOVF   04,W
+008C:  MOVFF  06,FE0
+0090:  MOVFF  05,FD8
+0094:  RETFIE 0
+.................... /*================================================================ 
+....................  
+.................... Code from: 
+.................... - Maxime De Cock 
+.................... - Melvin Campos 
+.................... - Hubert Van De Walle 
+.................... - Guillaume Vanden Herrewegen 
+....................  
+.................... Used for Thermopic project with 18f458 microship 
+....................  
+.................... ==================================================================*/ 
+....................  
+.................... #include <main.h> 
+.................... #include <18F458.h> 
+.................... //////// Standard Header file for the PIC18F458 device //////////////// 
+.................... #device PIC18F458 
+*
+00B6:  CLRF   01
+00B8:  CLRF   02
+00BA:  CLRF   00
+00BC:  CLRF   03
+00BE:  MOVF   21,W
+00C0:  BNZ   00C6
+00C2:  MOVF   20,W
+00C4:  BZ    00F6
+00C6:  MOVLW  10
+00C8:  MOVWF  22
+00CA:  BCF    FD8.0
+00CC:  RLCF   1E,F
+00CE:  RLCF   1F,F
+00D0:  RLCF   00,F
+00D2:  RLCF   03,F
+00D4:  MOVF   21,W
+00D6:  SUBWF  03,W
+00D8:  BNZ   00DE
+00DA:  MOVF   20,W
+00DC:  SUBWF  00,W
+00DE:  BNC   00EE
+00E0:  MOVF   20,W
+00E2:  SUBWF  00,F
+00E4:  BTFSS  FD8.0
+00E6:  DECF   03,F
+00E8:  MOVF   21,W
+00EA:  SUBWF  03,F
+00EC:  BSF    FD8.0
+00EE:  RLCF   01,F
+00F0:  RLCF   02,F
+00F2:  DECFSZ 22,F
+00F4:  BRA    00CA
+00F6:  GOTO   0320 (RETURN)
+00FA:  MOVF   20,W
+00FC:  CLRF   01
+00FE:  SUBWF  1F,W
+0100:  BC    0108
+0102:  MOVFF  1F,00
+0106:  BRA    0120
+0108:  CLRF   00
+010A:  MOVLW  08
+010C:  MOVWF  21
+010E:  RLCF   1F,F
+0110:  RLCF   00,F
+0112:  MOVF   20,W
+0114:  SUBWF  00,W
+0116:  BTFSC  FD8.0
+0118:  MOVWF  00
+011A:  RLCF   01,F
+011C:  DECFSZ 21,F
+011E:  BRA    010E
+0120:  RETURN 0
+*
+01E2:  MOVFF  FF2,0D
+01E6:  BCF    FF2.7
+01E8:  ADDWF  FE8,W
+01EA:  CLRF   FF7
+01EC:  RLCF   FF7,F
+01EE:  ADDLW  07
+01F0:  MOVWF  FF6
+01F2:  MOVLW  02
+01F4:  ADDWFC FF7,F
+01F6:  TBLRD*-
+01F8:  MOVF   FF5,W
+01FA:  MOVWF  FFA
+01FC:  TBLRD*
+01FE:  MOVF   FF5,W
+0200:  BTFSC  0D.7
+0202:  BSF    FF2.7
+0204:  MOVWF  FF9
+0206:  DATA 2E,01
+0208:  DATA 40,01
+020A:  DATA 52,01
+020C:  DATA 64,01
+020E:  DATA 76,01
+0210:  DATA 88,01
+0212:  DATA 9A,01
+0214:  DATA AC,01
+0216:  DATA BE,01
+0218:  DATA D0,01
+....................  
+.................... #list 
+....................  
+.................... #device ADC=10 
+....................  
+.................... #FUSES NOWDT                    /*No Watch Dog Timer*/ 
+....................  
+.................... #use delay(crystal=20000000) 
+021A:  CLRF   FEA
+021C:  MOVLW  1F
+021E:  MOVWF  FE9
+0220:  MOVF   FEF,W
+0222:  BZ    023E
+0224:  MOVLW  06
+0226:  MOVWF  01
+0228:  CLRF   00
+022A:  DECFSZ 00,F
+022C:  BRA    022A
+022E:  DECFSZ 01,F
+0230:  BRA    0228
+0232:  MOVLW  7B
+0234:  MOVWF  00
+0236:  DECFSZ 00,F
+0238:  BRA    0236
+023A:  DECFSZ FEF,F
+023C:  BRA    0224
+023E:  RETURN 0
+....................  
+.................... #define LED PIN_D4 
+.................... #define DELAY 1000 
+....................  
+....................  
+.................... #use rs232(baud=57600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8) 
+....................  
+.................... char buffer[1]; 
+....................  
+.................... #int_rda 
+.................... void isr(){ 
+....................    disable_interrupts(INT_RDA); 
+*
+0096:  BCF    F9D.5
+....................    gets(buffer); 
+0098:  CLRF   FEA
+009A:  MOVLW  16
+009C:  MOVWF  FE9
+009E:  DECF   FE9,F
+00A0:  BTFSS  F9E.5
+00A2:  BRA    00A0
+00A4:  MOVFF  FAE,FEC
+00A8:  MOVLW  0D
+00AA:  SUBWF  FEF,W
+00AC:  BNZ   00A0
+00AE:  CLRF   FEC
+00B0:  BCF    F9E.5
+00B2:  GOTO   0054
+.................... } 
+....................  
+....................  
+.................... /* 
+....................    Cette fonction permet de sortir un nombre sur 4 pins au lieu de 8 
+.................... */ 
+.................... void sortie(int nbr){ 
+....................    switch(nbr){ 
+*
+0122:  MOVF   1F,W
+0124:  ADDLW  F6
+0126:  BC    01E0
+0128:  ADDLW  0A
+012A:  GOTO   01E2
+....................          case 0 :  output_low(pin_d0); 
+012E:  BCF    F95.0
+0130:  BCF    F8C.0
+....................                    output_low(pin_d1); 
+0132:  BCF    F95.1
+0134:  BCF    F8C.1
+....................                    output_low(pin_d2); 
+0136:  BCF    F95.2
+0138:  BCF    F8C.2
+....................                    output_low(pin_d3); 
+013A:  BCF    F95.3
+013C:  BCF    F8C.3
+....................                    break; 
+013E:  BRA    01E0
+....................          case 1 :  output_high(pin_d0); 
+0140:  BCF    F95.0
+0142:  BSF    F8C.0
+....................                    output_low(pin_d1); 
+0144:  BCF    F95.1
+0146:  BCF    F8C.1
+....................                    output_low(pin_d2); 
+0148:  BCF    F95.2
+014A:  BCF    F8C.2
+....................                    output_low(pin_d3); 
+014C:  BCF    F95.3
+014E:  BCF    F8C.3
+....................                    break; 
+0150:  BRA    01E0
+....................          case 2 :  output_low(pin_d0); 
+0152:  BCF    F95.0
+0154:  BCF    F8C.0
+....................                    output_high(pin_d1); 
+0156:  BCF    F95.1
+0158:  BSF    F8C.1
+....................                    output_low(pin_d2); 
+015A:  BCF    F95.2
+015C:  BCF    F8C.2
+....................                    output_low(pin_d3); 
+015E:  BCF    F95.3
+0160:  BCF    F8C.3
+....................                    break; 
+0162:  BRA    01E0
+....................          case 3 :  output_high(pin_d0); 
+0164:  BCF    F95.0
+0166:  BSF    F8C.0
+....................                    output_high(pin_d1); 
+0168:  BCF    F95.1
+016A:  BSF    F8C.1
+....................                    output_low(pin_d2); 
+016C:  BCF    F95.2
+016E:  BCF    F8C.2
+....................                    output_low(pin_d3); 
+0170:  BCF    F95.3
+0172:  BCF    F8C.3
+....................                    break; 
+0174:  BRA    01E0
+....................          case 4 :  output_low(pin_d0); 
+0176:  BCF    F95.0
+0178:  BCF    F8C.0
+....................                    output_low(pin_d1); 
+017A:  BCF    F95.1
+017C:  BCF    F8C.1
+....................                    output_high(pin_d2); 
+017E:  BCF    F95.2
+0180:  BSF    F8C.2
+....................                    output_low(pin_d3); 
+0182:  BCF    F95.3
+0184:  BCF    F8C.3
+....................                    break; 
+0186:  BRA    01E0
+....................          case 5 :  output_high(pin_d0); 
+0188:  BCF    F95.0
+018A:  BSF    F8C.0
+....................                    output_low(pin_d1); 
+018C:  BCF    F95.1
+018E:  BCF    F8C.1
+....................                    output_high(pin_d2); 
+0190:  BCF    F95.2
+0192:  BSF    F8C.2
+....................                    output_low(pin_d3); 
+0194:  BCF    F95.3
+0196:  BCF    F8C.3
+....................                    break; 
+0198:  BRA    01E0
+....................          case 6 :  output_low(pin_d0); 
+019A:  BCF    F95.0
+019C:  BCF    F8C.0
+....................                    output_high(pin_d1); 
+019E:  BCF    F95.1
+01A0:  BSF    F8C.1
+....................                    output_high(pin_d2); 
+01A2:  BCF    F95.2
+01A4:  BSF    F8C.2
+....................                    output_low(pin_d3); 
+01A6:  BCF    F95.3
+01A8:  BCF    F8C.3
+....................                    break; 
+01AA:  BRA    01E0
+....................          case 7 :  output_high(pin_d0); 
+01AC:  BCF    F95.0
+01AE:  BSF    F8C.0
+....................                    output_high(pin_d1); 
+01B0:  BCF    F95.1
+01B2:  BSF    F8C.1
+....................                    output_high(pin_d2); 
+01B4:  BCF    F95.2
+01B6:  BSF    F8C.2
+....................                    output_low(pin_d3); 
+01B8:  BCF    F95.3
+01BA:  BCF    F8C.3
+....................                    break; 
+01BC:  BRA    01E0
+....................          case 8 :  output_low(pin_d0); 
+01BE:  BCF    F95.0
+01C0:  BCF    F8C.0
+....................                    output_low(pin_d1); 
+01C2:  BCF    F95.1
+01C4:  BCF    F8C.1
+....................                    output_low(pin_d2); 
+01C6:  BCF    F95.2
+01C8:  BCF    F8C.2
+....................                    output_high(pin_d3); 
+01CA:  BCF    F95.3
+01CC:  BSF    F8C.3
+....................                    break; 
+01CE:  BRA    01E0
+....................          case 9 :  output_high(pin_d0); 
+01D0:  BCF    F95.0
+01D2:  BSF    F8C.0
+....................                    output_low(pin_d1); 
+01D4:  BCF    F95.1
+01D6:  BCF    F8C.1
+....................                    output_low(pin_d2); 
+01D8:  BCF    F95.2
+01DA:  BCF    F8C.2
+....................                    output_high(pin_d3); 
+01DC:  BCF    F95.3
+01DE:  BSF    F8C.3
+....................                    break; 
+....................                     
+....................    } 
+01E0:  RETURN 0
+.................... } 
+....................  
+.................... /* 
+....................    Cette fonction permet d'afficher sur 2 afficheurs 7 segments à cathodes communes un nombre à 2 chiffres décimaux 
+.................... */ 
+....................  
+.................... void affiche(int nbr){ 
+*
+0240:  MOVFF  1C,1F
+0244:  MOVLW  0A
+0246:  MOVWF  20
+0248:  RCALL  00FA
+024A:  MOVFF  01,1D
+024E:  MOVFF  1C,1F
+0252:  MOVLW  0A
+0254:  MOVWF  20
+0256:  RCALL  00FA
+0258:  MOVFF  00,1E
+....................     
+....................    int nbr1 = nbr/10; 
+....................    int nbr2 = nbr%10; 
+....................    output_high(pin_d4); 
+025C:  BCF    F95.4
+025E:  BSF    F8C.4
+....................    output_low(pin_d5); 
+0260:  BCF    F95.5
+0262:  BCF    F8C.5
+....................    sortie(nbr1); 
+0264:  MOVFF  1D,1F
+0268:  RCALL  0122
+....................    delay_ms(10); 
+026A:  MOVLW  0A
+026C:  MOVWF  1F
+026E:  RCALL  021A
+....................    output_high(pin_d5); 
+0270:  BCF    F95.5
+0272:  BSF    F8C.5
+....................    output_low(pin_d4); 
+0274:  BCF    F95.4
+0276:  BCF    F8C.4
+....................    sortie(nbr2); 
+0278:  MOVFF  1E,1F
+027C:  RCALL  0122
+....................    delay_ms(10); 
+027E:  MOVLW  0A
+0280:  MOVWF  1F
+0282:  RCALL  021A
+....................    delay_ms(10); 
+0284:  MOVLW  0A
+0286:  MOVWF  1F
+0288:  RCALL  021A
+028A:  RETURN 0
+....................  
+....................  
+....................  
+.................... } 
+....................  
+.................... void ledRedOn(){ 
+....................    output_high(pin_d6); 
+028C:  BCF    F95.6
+028E:  BSF    F8C.6
+0290:  RETURN 0
+.................... } 
+....................  
+.................... void ledRedOff(){ 
+....................    output_low(pin_d6); 
+*
+0298:  BCF    F95.6
+029A:  BCF    F8C.6
+029C:  RETURN 0
+.................... } 
+....................  
+.................... void ledGreenOn(){ 
+....................    output_high(pin_d7); 
+029E:  BCF    F95.7
+02A0:  BSF    F8C.7
+02A2:  RETURN 0
+.................... } 
+....................  
+.................... void ledGreenOff(){ 
+....................    output_low(pin_d7); 
+*
+0292:  BCF    F95.7
+0294:  BCF    F8C.7
+0296:  RETURN 0
+.................... } 
+....................  
+....................  
+.................... void main() 
+*
+02A4:  CLRF   FF8
+02A6:  BCF    FD0.7
+02A8:  BSF    07.7
+02AA:  MOVLW  15
+02AC:  MOVWF  FAF
+02AE:  MOVLW  A6
+02B0:  MOVWF  FAC
+02B2:  MOVLW  90
+02B4:  MOVWF  FAB
+02B6:  BSF    FC1.0
+02B8:  BSF    FC1.1
+02BA:  BSF    FC1.2
+02BC:  BCF    FC1.3
+02BE:  MOVLW  07
+02C0:  MOVWF  FB4
+.................... { 
+....................    unsigned long temp; 
+....................    long affTemp; 
+....................     
+....................    setup_adc(ADC_CLOCK_DIV_32); //configure analog to digiral converter 
+02C2:  BCF    FC1.6
+02C4:  BCF    FC2.6
+02C6:  BSF    FC2.7
+02C8:  BSF    FC1.7
+02CA:  BSF    FC2.0
+....................    setup_adc_ports(ALL_ANALOG);  
+02CC:  BCF    FC1.0
+02CE:  BCF    FC1.1
+02D0:  BCF    FC1.2
+02D2:  BCF    FC1.3
+....................    set_adc_channel(0); 
+02D4:  MOVLW  00
+02D6:  MOVWF  01
+02D8:  MOVF   FC2,W
+02DA:  ANDLW  C7
+02DC:  IORWF  01,W
+02DE:  MOVWF  FC2
+....................    output_high(pin_e0); 
+02E0:  BCF    F96.0
+02E2:  BSF    F8D.0
+....................     
+....................    int temperatureAlerte = 25;   // température maximale 
+02E4:  MOVLW  19
+02E6:  MOVWF  1B
+....................      
+....................     
+....................    while(TRUE) 
+....................    { 
+....................       set_adc_channel(0);//set the pic to read from AN0 
+02E8:  MOVLW  00
+02EA:  MOVWF  01
+02EC:  MOVF   FC2,W
+02EE:  ANDLW  C7
+02F0:  IORWF  01,W
+02F2:  MOVWF  FC2
+....................       delay_us(10);//delay 10 microseconds to allow PIC to switch to analog channel 0 
+02F4:  MOVLW  10
+02F6:  MOVWF  00
+02F8:  DECFSZ 00,F
+02FA:  BRA    02F8
+02FC:  NOP   
+....................       temp=read_adc()/10; //read input from pin AN0: 0<=photo<=255 
+02FE:  BSF    FC2.2
+0300:  BTFSC  FC2.2
+0302:  BRA    0300
+0304:  MOVFF  FC4,03
+0308:  MOVFF  FC3,1C
+030C:  MOVFF  FC4,1D
+0310:  MOVFF  FC4,1F
+0314:  MOVFF  FC3,1E
+0318:  CLRF   21
+031A:  MOVLW  0A
+031C:  MOVWF  20
+031E:  BRA    00B6
+0320:  MOVFF  02,18
+0324:  MOVFF  01,17
+....................        
+....................        
+....................       affTemp = temp; 
+0328:  MOVFF  18,1A
+032C:  MOVFF  17,19
+....................  
+....................       if(temp>25 && temp<69){ 
+0330:  MOVF   18,F
+0332:  BNZ   033A
+0334:  MOVF   17,W
+0336:  SUBLW  19
+0338:  BC    036C
+033A:  MOVF   18,F
+033C:  BNZ   036C
+033E:  MOVF   17,W
+0340:  SUBLW  44
+0342:  BNC   036C
+....................          affTemp = temp - 1; 
+0344:  MOVLW  01
+0346:  SUBWF  17,W
+0348:  MOVWF  19
+034A:  MOVLW  00
+034C:  SUBWFB 18,W
+034E:  MOVWF  1A
+....................          affiche(affTemp); 
+0350:  MOVFF  19,1C
+0354:  RCALL  0240
+....................          if(affTemp > temperatureAlerte){ 
+0356:  MOVF   1A,F
+0358:  BNZ   0360
+035A:  MOVF   19,W
+035C:  SUBWF  1B,W
+035E:  BC    0366
+....................             ledRedOn(); 
+0360:  RCALL  028C
+....................             ledGreenOff();  
+0362:  RCALL  0292
+....................          //printf("%c", buffer[0]); 
+....................          } 
+0364:  BRA    036A
+....................          else{ 
+....................             ledRedOff(); 
+0366:  RCALL  0298
+....................             ledGreenOn(); 
+0368:  RCALL  029E
+....................          //printf("%c", buffer[0]); 
+....................          } 
+....................       } 
+036A:  BRA    03B8
+....................       else if(temp>69){ 
+036C:  MOVF   18,F
+036E:  BNZ   0376
+0370:  MOVF   17,W
+0372:  SUBLW  45
+0374:  BC    039E
+....................          affTemp = temp - 2; 
+0376:  MOVLW  02
+0378:  SUBWF  17,W
+037A:  MOVWF  19
+037C:  MOVLW  00
+037E:  SUBWFB 18,W
+0380:  MOVWF  1A
+....................          affiche(affTemp); 
+0382:  MOVFF  19,1C
+0386:  RCALL  0240
+....................          if(affTemp > temperatureAlerte){ 
+0388:  MOVF   1A,F
+038A:  BNZ   0392
+038C:  MOVF   19,W
+038E:  SUBWF  1B,W
+0390:  BC    0398
+....................             ledRedOn(); 
+0392:  RCALL  028C
+....................             ledGreenOff();  
+0394:  RCALL  0292
+....................          //printf("%c", buffer[0]); 
+....................          } 
+0396:  BRA    039C
+....................          else{ 
+....................             ledRedOff(); 
+0398:  RCALL  0298
+....................             ledGreenOn(); 
+039A:  RCALL  029E
+....................          //printf("%c", buffer[0]); 
+....................          } 
+....................       } 
+039C:  BRA    03B8
+....................       else{ 
+....................          affiche(affTemp); 
+039E:  MOVFF  19,1C
+03A2:  RCALL  0240
+....................          if(affTemp > temperatureAlerte){ 
+03A4:  MOVF   1A,F
+03A6:  BNZ   03AE
+03A8:  MOVF   19,W
+03AA:  SUBWF  1B,W
+03AC:  BC    03B4
+....................             ledRedOn(); 
+03AE:  RCALL  028C
+....................             ledGreenOff(); 
+03B0:  RCALL  0292
+....................          //printf("%c", buffer[0]);             
+....................          } 
+03B2:  BRA    03B8
+....................          else{ 
+....................             ledRedOff(); 
+03B4:  RCALL  0298
+....................             ledGreenOn(); 
+03B6:  RCALL  029E
+....................          //printf("%c", buffer[0]); 
+....................          } 
+....................       } 
+....................       delay_ms(10); 
+03B8:  MOVLW  0A
+03BA:  MOVWF  1F
+03BC:  RCALL  021A
+03BE:  BRA    02E8
+....................    } 
+....................  
+.................... } 
+....................  
+03C0:  SLEEP 
+
+Configuration Fuses:
+   Word  1: 2200   HS NOOSCSEN
+   Word  2: 0E0E   PUT BROWNOUT BORV25 NOWDT WDT128
+   Word  3: 0000  
+   Word  4: 0081   STVREN NOLVP NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

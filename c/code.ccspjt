@@ -1,0 +1,16 @@
+[PROJECT]
+Target=code.hex
+Processor_Text=PIC18F458
+CCSVersion=5.008
+Compiler=PCH
+[Target Data]
+FileList=code.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;D:\Git\thermopic\c\
+[code.c]
+Type=4
+[mru-list]
+1=code.c
+[Units]
+Count=1
+1=code (main)

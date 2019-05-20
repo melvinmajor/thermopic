@@ -1,0 +1,106 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @INTERRUPT_AREA
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     buffer
+017-018 MAIN.temp
+019-01A MAIN.affTemp
+01B     MAIN.temperatureAlerte
+01C     affiche.nbr
+01C     MAIN.@SCRATCH1
+01D     affiche.nbr1
+01D     MAIN.@SCRATCH2
+01E-01F @DIV1616.P1
+01E     affiche.nbr2
+01F     @delay_ms1.P1
+01F     @DIV88.P2
+01F     sortie.nbr
+020     @DIV88.P1
+020-021 @DIV1616.P2
+021     @DIV88.@SCRATCH1
+022     @DIV1616.@SCRATCH1
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P3
+FE9-FEA @READ_PROGRAM_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+000096  isr
+0000B6  @DIV1616
+0000FA  @DIV88
+000122  sortie
+0001E2  @goto10580
+00021A  @delay_ms1
+000240  affiche
+00028C  ledRedOn
+000292  ledGreenOff
+000298  ledRedOff
+00029E  ledGreenOn
+0002A4  MAIN
+0002A4  @cinit1
+0002C2  @cinit2
+
+Project Directory:
+    D:\Git\thermopic\c\
+
+Project Files:
+    code.c                                                  [30-avr.-10 06:16  CRC=9AFAD498]
+    main.h                                                  [30-avr.-10 06:22  CRC=D872A938]
+    C:\Program Files (x86)\PICC\Devices\18F458.h            [03-juil.-13 14:28  CRC=1AB1DF0F]
+
+Source signature=A8D13BEE
+
+Units:
+    code (main)
+
+Compiler Settings:
+    Processor:      PIC18F458
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   code.xsym
+    Errors:      code.err
+    Ext Symbols: code.esym
+    INHX32:      code.hex
+    Symbols:     code.sym
+    List:        code.lst
+    Debug/COFF:  code.cof
+    Project:     code.ccspjt
+    Call Tree:   code.tre
+    Statistics:  code.STA
